@@ -30,7 +30,7 @@ SQL> CREATE TABLE Orders
   6  /*
   7  IC1: The priority is one of: high, medium, or low
   8  */
-  9  CONSTRAINT IC1 CHECK(priority = 'high' OR priority = 'medium' OR priority = 'low')
+  9  CONSTRAINT IC1 CHECK (priority in ('high', 'medium', 'low'))
  10  /*
  11  IC2: The cost of a high priority order is above 2000.
  12  */

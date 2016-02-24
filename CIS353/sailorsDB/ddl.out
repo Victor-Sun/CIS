@@ -30,28 +30,24 @@ SQL> CREATE TABLE Orders
   6  /*
   7  IC1: The priority is one of: high, medium, or low
   8  */
-  9  <<< YOUR SQL CODE GOES HERE >>>
- 10  CONSTRAINT IC1 CHECK(priority = 'high' OR priority = 'medium' OR priority = 'low')
- 11  /*
- 12  IC2: The cost of a high priority order is above 2000.
- 13  */
- 14  <<< YOUR SQL CODE GOES HERE >>>
- 15  CONSTRAINT IC2 CHECK(priority = 'high' AND cost > 2000)
- 16  /*
- 17  IC3: The cost of a medium priority order is between 800 and 2200 (inclusive).
- 18  */
- 19  <<< YOUR SQL CODE GOES HERE >>>
- 20  CONSTRAINT IC3 CHECK(priority = 'medium' AND cost >= 800 AND cost <= 2200)
- 21  /*
- 22  IC4: The cost of a low priority order is less than 1000.
- 23  */
- 24  <<< YOUR SQL CODE GOES HERE >>>
- 25  CONSTRAINT IC4 CHECK(priority = 'low' AND cost < 1000)
- 26  );
-<<< YOUR SQL CODE GOES HERE >>>
+  9  CONSTRAINT IC1 CHECK(priority = 'high' OR priority = 'medium' OR priority = 'low')
+ 10  /*
+ 11  IC2: The cost of a high priority order is above 2000.
+ 12  */
+ 13  CONSTRAINT IC2 CHECK(priority = 'high' AND cost > 2000)
+ 14  /*
+ 15  IC3: The cost of a medium priority order is between 800 and 2200 (inclusive).
+ 16  */
+ 17  CONSTRAINT IC3 CHECK(priority = 'medium' AND cost >= 800 AND cost <= 2200)
+ 18  /*
+ 19  IC4: The cost of a low priority order is less than 1000.
+ 20  */
+ 21  CONSTRAINT IC4 CHECK(priority = 'low' AND cost < 1000)
+ 22  );
+CONSTRAINT IC2 CHECK(priority = 'high' AND cost > 2000)
 *
-ERROR at line 9:
-ORA-00904: : invalid identifier 
+ERROR at line 13:
+ORA-00907: missing right parenthesis 
 
 
 SQL> --
@@ -68,13 +64,12 @@ SQL> CREATE TABLE OrderLine
  10  Also: if an order is deleted then all its order lines must be deleted.
  11  IMPORTANT: DO NOT declare this IC as DEFERRABLE.
  12  */
- 13  <<< YOUR SQL CODE GOES HERE >>>
- 14  CONSTRAINT IC5 FOREIGN KEY (orderNum) REFERENCES Orders (orderNum) ON DELETE CASCADE
- 15  );
-<<< YOUR SQL CODE GOES HERE >>>
-*
+ 13  CONSTRAINT IC5 FOREIGN KEY (orderNum) REFERENCES Orders (orderNum) ON DELETE CASCADE
+ 14  );
+CONSTRAINT IC5 FOREIGN KEY (orderNum) REFERENCES Orders (orderNum) ON DELETE CASCADE
+                                                 *
 ERROR at line 13:
-ORA-00904: : invalid identifier 
+ORA-00942: table or view does not exist 
 
 
 SQL> --

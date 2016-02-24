@@ -1,7 +1,7 @@
 SPOOL ddl.out
 SET ECHO ON
 --
--- Author: <<< YOUR NAME GOES HERE >>>
+-- Author: Victor Sun
 --
 -- IMPORTANT: use the names IC-1, IC-2, etc. as given below.
 -- --------------------------------------------------------------------
@@ -21,19 +21,22 @@ cost INTEGER NOT NULL,
 IC1: The priority is one of: high, medium, or low
 */
 <<< YOUR SQL CODE GOES HERE >>>
-CONSTRAINT IC1 
+CONSTRAINT IC1 CHECK(priority = 'high' OR priority = 'medium' OR priority = 'low')
 /*
 IC2: The cost of a high priority order is above 2000.
 */
 <<< YOUR SQL CODE GOES HERE >>>
+CONSTRAINT IC2 CHECK(priority = 'high' AND cost > 2000)
 /*
 IC3: The cost of a medium priority order is between 800 and 2200 (inclusive).
 */
 <<< YOUR SQL CODE GOES HERE >>>
+CONSTRAINT IC3 CHECK(priority = 'medium' AND cost >= 800 AND cost <= 2200)
 /*
 IC4: The cost of a low priority order is less than 1000.
 */
 <<< YOUR SQL CODE GOES HERE >>>
+CONSTRAINT IC4 CHECK(priority = 'low' AND cost < 1000)
 );
 --
 --
@@ -50,6 +53,7 @@ Also: if an order is deleted then all its order lines must be deleted.
 IMPORTANT: DO NOT declare this IC as DEFERRABLE.
 */
 <<< YOUR SQL CODE GOES HERE >>>
+CONSTRAINT IC5 FOREIGN KEY (orderNum) REFERENCES Orders (orderNum) ON DELETE CASCADE
 );
 --
 -- ----------------------------------------------------------------

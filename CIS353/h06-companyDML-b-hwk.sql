@@ -112,8 +112,8 @@ Find pairs of employee lname's such that the two employees in the pair work on t
 List every pair once only. Sort the result by the lname in the left column in the result. 
 */
 SELECT 
-FROM Employee E1, Employee E2, WORKS_ON W
-WHERE
+FROM Employee E1, Employee E2, WORKS_ON W1, WORKS_ON W2
+WHERE 
 ORDER BY
 --
 /*(16B)

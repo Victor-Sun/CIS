@@ -43,9 +43,14 @@ void background (char * cmd){
     }
     argv[i] = NULL;
     
-    printf("cmd = %p\n", cmd);
+    printf("cmd = %p \"%s\"\n", cmd, cmd);
     for (i = 0; i < MAXARG; i++) {
-        printf("argv[%d] = %p\n", i, argv[i]);
+        if (argv[i] == NULL) {
+            printf("argv[%d] = %p \n", i, argv[i]);
+            break;
+        } else {
+            printf("argv[%d] = %p \"%s\"\n", i, argv[i], argv[i]);
+        }
     }
     
     

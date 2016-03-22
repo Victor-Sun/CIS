@@ -45,7 +45,7 @@ SELECT Ssn, Lname
 FROM EMPLOYEE
 WHERE Ssn LIKE '%88%' AND
 	Super_ssn IS NOT NULL
-ORDER BY Ssn
+ORDER BY Ssn;
 --
 -- JOINING 3 TABLES ------------------------------
 -- 
@@ -58,7 +58,7 @@ WHERE W.Hours > 20 AND
 	P.Dnum = 5 AND
 	W.Essn = E.Ssn AND
 	W.Pno = P.Pnumber
-ORDER BY E.Ssn
+ORDER BY E.Ssn;
 --
 -- JOINING 3 TABLES ---------------------------
 --
@@ -74,7 +74,7 @@ WHERE W.Hours < 10 AND
 	E.Dno = D.Dnumber AND
 	E.Ssn = W.Essn AND
 	P.Pnumber = W.Pno
-ORDER BY E.Lname
+ORDER BY E.Lname;
 --
 -- JOINING 4 TABLES -------------------------
 --
@@ -90,7 +90,7 @@ WHERE P.Plocation ='Houston' AND
 	E.Dno = P.Dnum AND
 	W.Pno = P.PNumber AND
 	W.Essn = D.Essn
-ORDER BY E.Lname
+ORDER BY E.Lname;
 --
 -- SELF JOIN -------------------------------------------
 -- 
@@ -99,11 +99,11 @@ Write a query that consists of one block only.
 For every employee who works for a department that is different from his supervisor's department: Find his ssn, lname, department number; and his supervisor's ssn, lname, and department number. 
 Sort the results by ssn.  
 */
-SELECT E1.Ssn, E1.Lname, E1.Dno, E2.Ssn Supervisor_Ssn, E2.Lname Supervisor_Lname, E2.Dno Supervisor_Dno
+SELECT E1.Ssn, E1.Lname, E1.Dno, E2.Ssn AS Supervisor_Ssn, E2.Lname AS Supervisor_Lname, E2.Dno AS Supervisor_Dno
 FROM Employee E1, Employee E2
 WHERE E1.Super_ssn = E2.Ssn AND
 	E1.Dno <> E2.Dno
-ORDER BY E1.Ssn
+ORDER BY E1.Ssn;
 --
 -- USING MORE THAN ONE RANGE VARIABLE ON ONE TABLE -------------------
 --
@@ -111,43 +111,74 @@ ORDER BY E1.Ssn
 Find pairs of employee lname's such that the two employees in the pair work on the same project for the same number of hours. 
 List every pair once only. Sort the result by the lname in the left column in the result. 
 */
-SELECT 
+SELECT DISTINCT E1.Lname AS FirstLname, E2.Lname AS SecondLname
 FROM Employee E1, Employee E2, WORKS_ON W1, WORKS_ON W2
-WHERE 
-ORDER BY
+WHERE W1.Pno = W2.Pno AND
+	W1.Hours = W2.Hours AND
+	E1.Ssn <> E2.Ssn AND
+	E1.Ssn = W1.Essn AND
+	E2.Ssn = W2.Essn AND
+	E1.Ssn < E2.Ssn
+ORDER BY E1.Lname;
 --
 /*(16B)
 For every employee who has more than one dependent: Find the ssn, lname, and number of dependents. Sort the result by lname
 */
-<<< Your SQL code goes here >>>
+SELECT E.Ssn, E.Lname
+FROM Employee E, Dependent D
+WHERE E.Ssn = D.Essn 
+GROUP BY E.Ssn, E.Lname
+HAVING COUNT(*) > 1
+ORDER BY E.Lname;
 -- 
 /*(17B)
-For every project that has more than 2 employees working on and the total hours worked on it is less than 40: Find the project number, project name, number of employees working on it, and the total number of hours worked by all employees on that project. Sort the results by project number.
+For every project that has more than 2 employees working on and the total hours worked on it is less than 40: Find the project number, project name, number of employees working on it,
+and the total number of hours worked by all employees on that project. Sort the results by project number.
 */
-<<< Your SQL code goes here >>>
+SELECT P.Pnumber, P.Pname, COUNT (*)
+FROM Employee E, Project P, WORKS_ON W
+WHERE E.Dno = P.Dnum AND
+	E.Ssn = W.Essn AND
+	P.Pnumber = W.Pno
+GROUP BY P.Pnumber, P.Pname
+ORDER BY P.Pnumber;
 --
 -- CORRELATED SUBQUERY --------------------------------
 --
 /*(18B)
 For every employee whose salary is above the average salary in his department: Find the dno, ssn, lname, and salary. Sort the results by department number.
 */
-<<< Your SQL code goes here >>>
+SELECT E.Dno, E.Ssn, E.Lname, E.Salary
+FROM Employee E
+WHERE E.Salary > 
+	( SELECT AVG(E.Salary) 
+	FROM Employee E)
+ORDER BY E.Dno;
 --
 -- CORRELATED SUBQUERY -------------------------------
 --
 /*(19B)
 For every employee who works for the research department but does not work on any one project for more than 20 hours: Find the ssn and lname. Sort the results by lname
 */
-<<< Your SQL code goes here >>>
+SELECT E.Ssn, E.Lname
+FROM Employee E, WORKS_ON W, Department D
+WHERE D.Dname = 'Research' AND
+	W.Hours < 20 AND
+	E.Dno = D.Dnumber AND
+	E.Ssn = W.Essn
+ORDER BY E.Lname;
+
+
 --
 -- DIVISION ---------------------------------------------
 --
 /*(20B) Hint: This is a DIVISION query
 For every employee who works on every project that is controlled by department 4: Find the ssn and lname. Sort the results by lname
 */
-<<< Your SQL code goes here >>>
+SELECT E.Ssn, E.Lname
+FROM Employee E, Department D
+WHERE 
+ORDER BY E.Lname;
 --
 SET ECHO OFF
 SPOOL OFF
-
-

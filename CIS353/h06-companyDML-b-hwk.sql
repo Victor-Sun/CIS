@@ -151,7 +151,7 @@ For every employee whose salary is above the average salary in his department: F
 SELECT E.Dno, E.Ssn, E.Lname, E.Salary
 FROM Employee E
 WHERE E.Salary > 
-	( SELECT AVG(E.Salary) 
+	(SELECT AVG(E.Salary) 
 	FROM Employee E)
 ORDER BY E.Dno;
 --
@@ -160,15 +160,11 @@ ORDER BY E.Dno;
 /*(19B)
 For every employee who works for the research department but does not work on any one project for more than 20 hours: Find the ssn and lname. Sort the results by lname
 */
-SELECT E.Ssn, E.Lname
-FROM Employee E, WORKS_ON W, Department D
-WHERE D.Dname = 'Research' AND
-	W.Hours < 20 AND
-	E.Dno = D.Dnumber AND
-	E.Ssn = W.Essn
+FROM Employee E
+WHERE
+    (SELECT D.Dname FROM Department D WHERE D.Dnumber = E.Dno) = 'Research' AND
+    (SELECT MAX(W.Hours) FROM WORKS_ON W WHERE W.Essn = E.Ssn) < 20
 ORDER BY E.Lname;
-
-
 --
 -- DIVISION ---------------------------------------------
 --
@@ -176,8 +172,11 @@ ORDER BY E.Lname;
 For every employee who works on every project that is controlled by department 4: Find the ssn and lname. Sort the results by lname
 */
 SELECT E.Ssn, E.Lname
-FROM Employee E, Department D
-WHERE 
+FROM Employee E
+WHERE
+    (SELECT COUNT(*) FROM Works_On W WHERE
+        W.Essn = E.Ssn AND
+        (SELECT P.Dnum FROM Project P WHERE P.Pnumber = W.Pno) = 4) > 0
 ORDER BY E.Lname;
 --
 SET ECHO OFF

@@ -160,6 +160,7 @@ ORDER BY E.Dno;
 /*(19B)
 For every employee who works for the research department but does not work on any one project for more than 20 hours: Find the ssn and lname. Sort the results by lname
 */
+SELECT E.Ssn, E.Lname
 FROM Employee E
 WHERE
     (SELECT D.Dname FROM Department D WHERE D.Dnumber = E.Dno) = 'Research' AND

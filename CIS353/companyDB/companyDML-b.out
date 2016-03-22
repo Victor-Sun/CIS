@@ -190,18 +190,16 @@ SQL> --
 SQL> /*(19B)
 SQL> For every employee who works for the research department but does not work on any one project for more than 20 hours: Find the ssn and lname. Sort the results by lname
 SQL> */
-SQL> FROM Employee E
-SP2-0734: unknown command beginning "FROM Emplo..." - rest of line ignored.
-SQL> WHERE
-SP2-0042: unknown command "WHERE" - rest of line ignored.
-SQL> 	 (SELECT D.Dname FROM Department D WHERE D.Dnumber = E.Dno) = 'Research' AND
-  2  	 (SELECT MAX(W.Hours) FROM WORKS_ON W WHERE W.Essn = E.Ssn) < 20
-  3  ORDER BY E.Lname;
-    (SELECT D.Dname FROM Department D WHERE D.Dnumber = E.Dno) = 'Research' AND
-                                                               *
-ERROR at line 1:
-ORA-00933: SQL command not properly ended 
+SQL> SELECT E.Ssn, E.Lname
+  2  FROM Employee E
+  3  WHERE
+  4  	 (SELECT D.Dname FROM Department D WHERE D.Dnumber = E.Dno) = 'Research' AND
+  5  	 (SELECT MAX(W.Hours) FROM WORKS_ON W WHERE W.Essn = E.Ssn) < 20
+  6  ORDER BY E.Lname;
 
+SSN       LNAME                                                                 
+--------- ---------------                                                       
+333445555 Wong                                                                  
 
 SQL> --
 SQL> -- DIVISION ---------------------------------------------

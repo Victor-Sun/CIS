@@ -147,6 +147,9 @@ void simulation(int numOfTellers) {
     const int max_time = 480;
     int remaining_customers;
 
+    // Stats-related variables.
+    int total_customers = 0;
+
     tellers = malloc(numOfTellers * sizeof(Teller));
     if (tellers == NULL) {
         printf("Cannot malloc tellers.\n");
@@ -182,6 +185,7 @@ void simulation(int numOfTellers) {
         if (now < max_time) {  // Bank doors are still open.
             int new_customers;
             new_customers = arrivingCustomers();
+            total_customers += new_customers;
             for (i = 0; i < new_customers; i++) {
                 Customer* c;
                 c = malloc(sizeof(Customer));

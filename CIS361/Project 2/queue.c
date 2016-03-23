@@ -12,7 +12,7 @@ void init_queue(Queue* q) {
 
 void enqueue(Queue* q, void* payload) {
     Node* node;
-    
+
     node = malloc(sizeof(Node));
     if (node == NULL) {
         printf("Cannot malloc Node.\n");
@@ -20,6 +20,7 @@ void enqueue(Queue* q, void* payload) {
     }
 
     node->payload = payload;
+    node->next = NULL;
 
     if (q->head == NULL) {
         q->head = node;

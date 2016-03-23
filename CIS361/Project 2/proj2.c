@@ -119,7 +119,7 @@ typedef struct Teller {
 void simulation(int numOfTellers) {
     Teller* tellers;
     Queue q;
-    int i, now; 
+    int i, now;
 
     tellers = malloc(numOfTellers * sizeof(Teller));
     if (tellers == NULL) {
@@ -139,7 +139,7 @@ void simulation(int numOfTellers) {
             Customer* c = tellers[i].customer;
             if (c != NULL && c->exit_time >= now) {
                 tellers[i].customer = NULL;
-                printf("Customer %p leaving teller %d: %d, %d, %d\n", c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
+                printf("%d: Customer %p leaving teller %d: %d, %d, %d\n", now, c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
                 free(c);
             }
         }
@@ -156,7 +156,7 @@ void simulation(int numOfTellers) {
             c->teller_time = -1;
             c->exit_time = -1;
 
-            printf("Customer %p entering the queue %d: %d\n", c, i, c->enter_time);  // VERBOSE
+            printf("%d: Customer %p entering the queue %d: %d\n", now, c, i, c->enter_time);  // VERBOSE
             enqueue(&q, c);
         }
 
@@ -173,7 +173,7 @@ void simulation(int numOfTellers) {
                     service_time = round(expdist(AVG_SERVICE));
                     c->teller_time = now;
                     c->exit_time = now + service_time;
-                    printf("Customer %p going to teller %d: %d, %d, %d\n", c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
+                    printf("%d: Customer %p going to teller %d: %d, %d, %d\n", now, c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
                 }
             }
         }

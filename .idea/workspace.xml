@@ -47,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/CIS361/Project 2/proj2.c">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.10215054">
-              <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -63,6 +63,7 @@
       <list>
         <option value="$PROJECT_DIR$/CIS361/lab6.c" />
         <option value="$PROJECT_DIR$/CIS361/Project 2/project2.c" />
+        <option value="$PROJECT_DIR$/CIS361/Project 2/proj2.c" />
       </list>
     </option>
   </component>
@@ -372,7 +373,7 @@
     <entry file="file://$PROJECT_DIR$/CIS361/Project 2/proj2.c">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.10215054">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
           <folding />
         </state>
       </provider>

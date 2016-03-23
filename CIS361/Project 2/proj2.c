@@ -1,6 +1,3 @@
-// Project: Project 2 Event-Driven Simulation and Bash Script
-// Name: Victor Sun
-//
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -12,9 +9,9 @@
 
 
 // Other steps:
-// * Implement queue (as linked list).
-// * Read the proj2.dat.
-// * Implement the how_many_customers_at_this_minute()
+// * DONE Implement queue (as linked list).
+// * DONE Read the proj2.dat.
+// * DONE Implement the how_many_customers_at_this_minute()
 // * Some other stuff...
 //
 // For each minute from 0 to 480:
@@ -70,11 +67,12 @@ void read_table_from_file(const char* filename) {
 }
 
 
-double expdist (double mean) {
+double e xpdist (double mean) {
     double r = rand();
     r /= RAND_MAX;
     return -mean * log(r);
 }
+
 
 int arrivingCustomers() {
 // Sum: 100
@@ -90,6 +88,7 @@ int arrivingCustomers() {
 
     int i;
     int range = (rand() % 100) + 1;
+    //int range = (100 * (double) rand() / RAND_MAX) + 1;
     int sum = 0;
 
     for(i = 0; i < MAX_CUSTOMER_PERCENTAGE_SIZE; i++){
@@ -105,19 +104,92 @@ int arrivingCustomers() {
     return range;
 }
 
+
+typedef struct Customer {
+    int enter_time;   // When it enters the bank and enters the queue.
+    int teller_time;  // When it goes to the teller.
+    int exit_time;    // When it leaves the teller and leaves the bank.
+} Customer;
+
+typedef struct Teller {
+    Customer* customer;
+} Teller;
+
+
+void simulation(int numOfTellers) {
+    Teller* tellers;
+    Queue q;
+    int i, now;
+
+    tellers = malloc(numOfTellers * sizeof(Teller));
+    if (tellers == NULL) {
+        printf("Cannot malloc tellers.\n");
+        exit(1);
+    }
+    for (i = 0; i < numOfTellers; i++) {
+        tellers[i].customer = NULL;
+    }
+
+    init_queue(&q);
+
+    for (now = 0; now < 480; now++) {
+        int new_customers;
+
+        for (i = 0; i < numOfTellers; i++) {
+            Customer* c = tellers[i].customer;
+            if (c != NULL && c->exit_time >= now) {
+                tellers[i].customer = NULL;
+                printf("");  // V
+                free(c);
+            }
+        }
+
+        new_customers = arrivingCustomers();
+        for (i = 0; i < new_customers; i++) {
+            Customer* c;
+            c = malloc(sizeof(Customer));
+            if (c == NULL) {
+                printf("Cannot malloc Customer.\n");
+                exit(1);
+            }
+            c->enter_time = now;
+            c->teller_time = -1;
+            c->exit_time = -1;
+
+            enqueue(&q, c);
+        }
+
+        for (i = 0; i < numOfTellers; i++) {
+            if (tellers[i].customer == NULL) {
+                Customer* c;
+                c = dequeue(&q);
+                if (c == NULL) {
+                    break;
+                } else {
+                    int service_time;
+
+                    tellers[i].customer = c;
+                    service_time = round(expdist(AVG_SERVICE));
+                    c->teller_time = now;
+                    c->exit_time = now + service_time;
+                }
+            }
+        }
+    }
+
+    free(tellers);
+}
+
+
 int main () {
-    //double t;
     int i;
 
     srand((unsigned) time(NULL));
     read_table_from_file("Proj2.dat");
 
-
-    for(i = 0; i < 1000000; i++) {
-        printf("%d\n", arrivingCustomers());
+    for (i = 4; i <= 7; i++) {
+        simulation(i);
     }
-
-    //t = expdist (AVG_SERVICE);
 
     return 0;
 }

@@ -66,13 +66,11 @@ void read_table_from_file(const char* filename) {
     fclose(fin);
 }
 
-
 double expdist (double mean) {
     double r = rand();
     r /= RAND_MAX;
     return -mean * log(r);
 }
-
 
 int arrivingCustomers() {
 // Sum: 100
@@ -118,26 +116,25 @@ typedef struct Teller {
 
 void print_queue(Queue* q) {
     const Node* node;
-    const Customer* c;
     int count = 0;
 
     node = q->head;
     while (node) {
-        c = node->payload;
         printf("q[%d] -> %p payload=%p next=%p\n", count, node, node->payload, node->next);
         node = node->next;
         count++;
     }
 }
 
-void print_tellers(Teller* t, int n) {
+void print_tellers(Teller* tellers, int n) {
     int i;
     for (i = 0; i < n; i++) {
-        Customer c = tellers[i].customer;
+        Customer* c;
+        c = tellers[i].customer;
         if (c == NULL) {
             printf("t[%d] -> NULL\n", i);
         } else {
-            printf("t[%d] -> %p: %d, %d, %d\n", i, c, c->start_time, c->teller_timer, c->exit_time);
+            printf("t[%d] -> %p: %d, %d, %d\n", i, c, c->enter_time, c->teller_time, c->exit_time);
         }
     }
 }
@@ -147,6 +144,8 @@ void simulation(int numOfTellers) {
     Teller* tellers;
     Queue q;
     int i, now;
+    const int max_time = 480;
+    int remaining_customers;
 
     tellers = malloc(numOfTellers * sizeof(Teller));
     if (tellers == NULL) {
@@ -159,38 +158,49 @@ void simulation(int numOfTellers) {
 
     init_queue(&q);
 
-    //for (now = 0; now < 480; now++) {
-    for (now = 0; now < 48; now++) {
-        int new_customers;
+    remaining_customers = 0;
+    for (now = 0; now < max_time || remaining_customers > 0; now++) {
+        //print_tellers(tellers, numOfTellers);
 
+        remaining_customers = 0;
         for (i = 0; i < numOfTellers; i++) {
             Customer* c = tellers[i].customer;
-            if (c != NULL && c->exit_time >= now) {
-                tellers[i].customer = NULL;
-                printf("%d: Customer %p leaving teller %d: %d, %d, %d\n", now, c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
-                free(c);
+            if (c != NULL) {
+                if (c->exit_time <= now) {
+                    tellers[i].customer = NULL;
+                    printf("%d: Customer %p leaving teller %d: %d, %d, %d\n", now, c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
+                    free(c);
+                } else {
+                    remaining_customers++;
+                }
             }
         }
 
         //print_queue(&q);
+        //print_tellers(tellers, numOfTellers);
 
-        new_customers = arrivingCustomers();
-        for (i = 0; i < new_customers; i++) {
-            Customer* c;
-            c = malloc(sizeof(Customer));
-            if (c == NULL) {
-                printf("Cannot malloc Customer.\n");
-                exit(1);
+        if (now < max_time) {  // Bank doors are still open.
+            int new_customers;
+            new_customers = arrivingCustomers();
+            for (i = 0; i < new_customers; i++) {
+                Customer* c;
+                c = malloc(sizeof(Customer));
+                if (c == NULL) {
+                    printf("Cannot malloc Customer.\n");
+                    exit(1);
+                }
+                c->enter_time = now;
+                c->teller_time = -1;
+                c->exit_time = -1;
+    
+                printf("%d: Customer %p entering the queue %d: %d\n", now, c, i, c->enter_time);  // VERBOSE
+                enqueue(&q, c);
+                remaining_customers++;
             }
-            c->enter_time = now;
-            c->teller_time = -1;
-            c->exit_time = -1;
-
-            printf("%d: Customer %p entering the queue %d: %d\n", now, c, i, c->enter_time);  // VERBOSE
-            enqueue(&q, c);
         }
 
         //print_queue(&q);
+        //print_tellers(tellers, numOfTellers);
 
         for (i = 0; i < numOfTellers; i++) {
             if (tellers[i].customer == NULL) {
@@ -201,19 +211,27 @@ void simulation(int numOfTellers) {
                 } else {
                     int service_time;
 
-                    tellers[i].customer = c;
                     service_time = round(expdist(AVG_SERVICE));
                     c->teller_time = now;
                     c->exit_time = now + service_time;
-                    printf("%d: Customer %p going to teller %d: %d, %d, %d\n", now, c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
+                    
+                    if (service_time == 0) {
+                        printf("%d: Customer %p going to teller and leaving %d: %d, %d, %d\n", now, c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
+                        free(c);
+                        i--;
+                    } else {
+                        remaining_customers++;
+    
+                        tellers[i].customer = c;
+                        printf("%d: Customer %p going to teller %d: %d, %d, %d\n", now, c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
+                    }
                 }
             }
         }
 
         //print_queue(&q);
+        //print_tellers(tellers, numOfTellers);
     }
-
-    // TODO: finish the remaining customers.
 
     free(tellers);
 }

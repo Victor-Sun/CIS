@@ -116,6 +116,33 @@ typedef struct Teller {
 } Teller;
 
 
+void print_queue(Queue* q) {
+    const Node* node;
+    const Customer* c;
+    int count = 0;
+
+    node = q->head;
+    while (node) {
+        c = node->payload;
+        printf("q[%d] -> %p payload=%p next=%p\n", count, node, node->payload, node->next);
+        node = node->next;
+        count++;
+    }
+}
+
+void print_tellers(Teller* t, int n) {
+    int i;
+    for (i = 0; i < n; i++) {
+        Customer c = tellers[i].customer;
+        if (c == NULL) {
+            printf("t[%d] -> NULL\n", i);
+        } else {
+            printf("t[%d] -> %p: %d, %d, %d\n", i, c, c->start_time, c->teller_timer, c->exit_time);
+        }
+    }
+}
+
+
 void simulation(int numOfTellers) {
     Teller* tellers;
     Queue q;
@@ -132,7 +159,8 @@ void simulation(int numOfTellers) {
 
     init_queue(&q);
 
-    for (now = 0; now < 480; now++) {
+    //for (now = 0; now < 480; now++) {
+    for (now = 0; now < 48; now++) {
         int new_customers;
 
         for (i = 0; i < numOfTellers; i++) {
@@ -143,6 +171,8 @@ void simulation(int numOfTellers) {
                 free(c);
             }
         }
+
+        //print_queue(&q);
 
         new_customers = arrivingCustomers();
         for (i = 0; i < new_customers; i++) {
@@ -159,6 +189,8 @@ void simulation(int numOfTellers) {
             printf("%d: Customer %p entering the queue %d: %d\n", now, c, i, c->enter_time);  // VERBOSE
             enqueue(&q, c);
         }
+
+        //print_queue(&q);
 
         for (i = 0; i < numOfTellers; i++) {
             if (tellers[i].customer == NULL) {
@@ -177,6 +209,8 @@ void simulation(int numOfTellers) {
                 }
             }
         }
+
+        //print_queue(&q);
     }
 
     // TODO: finish the remaining customers.

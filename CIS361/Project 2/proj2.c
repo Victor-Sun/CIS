@@ -3,6 +3,7 @@
 #include <time.h>
 #include <math.h>
 #include "queue.h"
+#include "stats.h"
 
 #define AVG_SERVICE 2.0
 #define MAX_CUSTOMER_PERCENTAGE_SIZE 102

@@ -1,3 +1,5 @@
+#include "stats.h"
+
 struct StatsCounter {
     int count;
     double sum;

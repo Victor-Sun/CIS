@@ -1,4 +1,5 @@
-typedef struct StatsCounter {} StatsCounter;
+typedef struct StatsCounter StatsCounter;
+
 
 void init_statscounter(StatsCounter* sc);
 void add_sample_statscounter(StatsCounter* sc, int sample);

@@ -1,11 +1,11 @@
 // Project: Project 2 Event-Driven Simulation and Bash Script
 // Name: Victor Sun
 //
-
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <math.h>
-#include "queue.h"
+//#include "queue.h"
 
 #define AVG_SERVICE 2.0
 #define MAX_CUSTOMER_PERCENTAGE_SIZE 102
@@ -113,7 +113,11 @@ int main () {
     read_table_from_file("Proj2.dat");
 
 
+    for(i = 0; i < 1000000; i++) {
+        printf("%d\n", arrivingCustomers());
+    }
 
     //t = expdist (AVG_SERVICE);
 
+    return 0;
 }

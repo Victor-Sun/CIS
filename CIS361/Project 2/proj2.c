@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
-//#include "queue.h"
+#include "queue.h"
 
 #define AVG_SERVICE 2.0
 #define MAX_CUSTOMER_PERCENTAGE_SIZE 102
@@ -67,7 +67,7 @@ void read_table_from_file(const char* filename) {
 }
 
 
-double e xpdist (double mean) {
+double expdist (double mean) {
     double r = rand();
     r /= RAND_MAX;
     return -mean * log(r);
@@ -119,7 +119,7 @@ typedef struct Teller {
 void simulation(int numOfTellers) {
     Teller* tellers;
     Queue q;
-    int i, now;
+    int i, now; 
 
     tellers = malloc(numOfTellers * sizeof(Teller));
     if (tellers == NULL) {
@@ -139,7 +139,7 @@ void simulation(int numOfTellers) {
             Customer* c = tellers[i].customer;
             if (c != NULL && c->exit_time >= now) {
                 tellers[i].customer = NULL;
-                printf("");  // V
+                printf("Customer %p leaving teller %d: %d, %d, %d\n", c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
                 free(c);
             }
         }
@@ -156,6 +156,7 @@ void simulation(int numOfTellers) {
             c->teller_time = -1;
             c->exit_time = -1;
 
+            printf("Customer %p entering the queue %d: %d\n", c, i, c->enter_time);  // VERBOSE
             enqueue(&q, c);
         }
 
@@ -172,10 +173,13 @@ void simulation(int numOfTellers) {
                     service_time = round(expdist(AVG_SERVICE));
                     c->teller_time = now;
                     c->exit_time = now + service_time;
+                    printf("Customer %p going to teller %d: %d, %d, %d\n", c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
                 }
             }
         }
     }
+
+    // TODO: finish the remaining customers.
 
     free(tellers);
 }

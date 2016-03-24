@@ -7,6 +7,7 @@ typedef struct Node {
 typedef struct Queue {
     Node* head;
     Node* tail;
+    int size;
 } Queue;
 
 

@@ -1,0 +1,20 @@
+Simulation for 4 tellers:
+Total customers served: 1052
+Time waiting in line: avg=11.018061, max=21
+Line length: avg=23.182000, max=49
+
+Simulation for 5 tellers:
+Total customers served: 1103
+Time waiting in line: avg=3.840435, max=14
+Line length: avg=8.680328, max=28
+
+Simulation for 6 tellers:
+Total customers served: 1026
+Time waiting in line: avg=0.264133, max=4
+Line length: avg=0.556468, max=9
+
+Simulation for 7 tellers:
+Total customers served: 1038
+Time waiting in line: avg=0.213873, max=4
+Line length: avg=0.458678, max=9
+

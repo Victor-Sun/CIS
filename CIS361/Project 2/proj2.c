@@ -264,8 +264,8 @@ void simulation(int numOfTellers) {
     // * Maximum length of the waiting line
     
     printf("Total customers served: %d\n", (int) get_sum_statscounter(&total_customers));
-    printf("Time waiting in line: avg=%f, max=%f\n", get_avg_statscounter(&time_in_queue), get_max_statscounter(&time_in_queue));
-    printf("Line length: avg=%f, max=%f\n", get_avg_statscounter(&queue_length), get_max_statscounter(&queue_length));
+    printf("Time waiting in line: avg=%f, max=%d\n", get_avg_statscounter(&time_in_queue), (int) get_max_statscounter(&time_in_queue));
+    printf("Line length: avg=%f, max=%d\n", get_avg_statscounter(&queue_length), (int) get_max_statscounter(&queue_length));
 }
 
 

@@ -1,3 +1,5 @@
+// Project: Event-Drive Siumlation and Bash Script
+// Name: Victor Sun
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -8,13 +10,19 @@
 #define AVG_SERVICE 2.0
 #define MAX_CUSTOMER_PERCENTAGE_SIZE 102
 
+/*
+	Structure for the amount of customers and the percentage of the amount showing
+*/
 typedef struct CustomerPercentage {
 	int customers;   // The amount of customers.
 	int percentage;  // Percentage of time it happens.
 } CustomerPercentage;
 
 CustomerPercentage percentage_table[MAX_CUSTOMER_PERCENTAGE_SIZE];
-
+/*
+	Read file from local directory
+	@param filename: The file with the data on customer
+*/
 void read_table_from_file(const char* filename) {
 	FILE * fin;
 	int x, y;
@@ -49,6 +57,10 @@ void read_table_from_file(const char* filename) {
 	fclose(fin);
 }
 
+/*
+	Get's a random time for how long a customer stays at a teller
+	@param mean: The number
+*/
 double expdist (double mean) {
 	double r = rand();
 	r /= RAND_MAX;
@@ -56,20 +68,10 @@ double expdist (double mean) {
 }
 
 int arrivingCustomers() {
-// Sum: 100
-// 0     15       35        60
-// |------|--------|---------|
-//   0 15%   1 20%    2 25%
-//
-// 0    15  15
-// 1    20  15+20 = 35
-// 2    25  35+25 = 60
-// 3    10  60+10 = 70
-// 4    30  70+30 = 100
 
 	int i;
 	int range = (rand() % 100) + 1;
-	//int range = (100 * (double) rand() / RAND_MAX) + 1;
+
 	int sum = 0;
 
 	for(i = 0; i < MAX_CUSTOMER_PERCENTAGE_SIZE; i++){
@@ -85,11 +87,10 @@ int arrivingCustomers() {
 	return range;
 }
 
-
 typedef struct Customer {
-	int enter_time;   // When it enters the bank and enters the queue.
-	int teller_time;  // When it goes to the teller.
-	int exit_time;    // When it leaves the teller and leaves the bank.
+	int enter_time;   // When customer enters the bank and enters the queue.
+	int teller_time;  // When customer goes to the teller.
+	int exit_time;    // When customer leaves the teller and leaves the bank.
 } Customer;
 
 typedef struct Teller {
@@ -129,13 +130,6 @@ void simulation(int numOfTellers) {
 	int i, now;
 	const int max_time = 480;
 	int remaining_customers;
-
-	// Stats-related variables.
-	// * Total number of customers served
-	// * The average length of time customers spent waiting in line
-	// * Maximum length of time a customer spent waiting in line 
-	// * Average length of the waiting line 
-	// * Maximum length of the waiting line
 
 	StatsCounter total_customers;
 	StatsCounter time_in_queue;
@@ -238,12 +232,6 @@ void simulation(int numOfTellers) {
 	}
 
 	free(tellers);
-	// Stats-related variables.
-	// * Total number of customers served
-	// * The average length of time customers spent waiting in line
-	// * Maximum length of time a customer spent waiting in line 
-	// * Average length of the waiting line 
-	// * Maximum length of the waiting line
 	
 	printf("Total customers served: %d\n", (int) get_sum_statscounter(&total_customers));
 	printf("Time waiting in line: avg=%f, max=%d\n", get_avg_statscounter(&time_in_queue), (int) get_max_statscounter(&time_in_queue));

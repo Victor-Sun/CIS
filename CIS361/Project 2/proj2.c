@@ -79,11 +79,11 @@ int arrivingCustomers() {
 // |------|--------|---------|
 //   0 15%   1 20%    2 25%
 //
-// 0    15  15
-// 1    20  15+20 = 35
-// 2    25  35+25 = 60
-// 3    10  60+10 = 70
-// 4    30  70+30 = 100
+// 0	15  15
+// 1	20  15+20 = 35
+// 2	25  35+25 = 60
+// 3	10  60+10 = 70
+// 4	30  70+30 = 100
 
     int i;
     int range = (rand() % 100) + 1;
@@ -149,8 +149,21 @@ void simulation(int numOfTellers) {
     int remaining_customers;
 
     // Stats-related variables.
-    int total_customers = 0;
+    // * Total number of customers served
+    // * The average length of time customers spent waiting in line
+    // * Maximum length of time a customer spent waiting in line 
+    // * Average length of the waiting line 
+    // * Maximum length of the waiting line
 
+    StatsCounter total_customers;
+    StatsCounter time_in_queue;
+    StatsCounter queue_length;
+
+    init_statscounter(&total_customers);
+    init_statscounter(&time_in_queue);
+    init_statscounter(&queue_length);
+
+    // Creating the tellers.
     tellers = malloc(numOfTellers * sizeof(Teller));
     if (tellers == NULL) {
         printf("Cannot malloc tellers.\n");
@@ -160,8 +173,10 @@ void simulation(int numOfTellers) {
         tellers[i].customer = NULL;
     }
 
+
     init_queue(&q);
 
+    // Main simulation loop.
     remaining_customers = 0;
     for (now = 0; now < max_time || remaining_customers > 0; now++) {
         //print_tellers(tellers, numOfTellers);
@@ -172,7 +187,7 @@ void simulation(int numOfTellers) {
             if (c != NULL) {
                 if (c->exit_time <= now) {
                     tellers[i].customer = NULL;
-                    printf("%d: Customer %p leaving teller %d: %d, %d, %d\n", now, c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
+                    //printf("%d: Customer %p leaving teller %d: %d, %d, %d\n", now, c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
                     free(c);
                 } else {
                     remaining_customers++;
@@ -186,7 +201,7 @@ void simulation(int numOfTellers) {
         if (now < max_time) {  // Bank doors are still open.
             int new_customers;
             new_customers = arrivingCustomers();
-            total_customers += new_customers;
+            add_sample_statscounter(&total_customers, new_customers);
             for (i = 0; i < new_customers; i++) {
                 Customer* c;
                 c = malloc(sizeof(Customer));
@@ -198,7 +213,7 @@ void simulation(int numOfTellers) {
                 c->teller_time = -1;
                 c->exit_time = -1;
     
-                printf("%d: Customer %p entering the queue %d: %d\n", now, c, i, c->enter_time);  // VERBOSE
+                //printf("%d: Customer %p entering the queue %d: %d\n", now, c, i, c->enter_time);  // VERBOSE
                 enqueue(&q, c);
                 remaining_customers++;
             }
@@ -220,25 +235,37 @@ void simulation(int numOfTellers) {
                     c->teller_time = now;
                     c->exit_time = now + service_time;
                     
+                    add_sample_statscounter(&time_in_queue, now - c->enter_time);
+                    
                     if (service_time == 0) {
-                        printf("%d: Customer %p going to teller and leaving %d: %d, %d, %d\n", now, c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
+                        //printf("%d: Customer %p going to teller and leaving %d: %d, %d, %d\n", now, c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
                         free(c);
                         i--;
                     } else {
                         remaining_customers++;
     
                         tellers[i].customer = c;
-                        printf("%d: Customer %p going to teller %d: %d, %d, %d\n", now, c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
+                        //printf("%d: Customer %p going to teller %d: %d, %d, %d\n", now, c, i, c->enter_time, c->teller_time, c->exit_time);  // VERBOSE
                     }
                 }
             }
         }
-
+        add_sample_statscounter(&queue_length, q.size);
         //print_queue(&q);
         //print_tellers(tellers, numOfTellers);
     }
 
     free(tellers);
+    // Stats-related variables.
+    // * Total number of customers served
+    // * The average length of time customers spent waiting in line
+    // * Maximum length of time a customer spent waiting in line 
+    // * Average length of the waiting line 
+    // * Maximum length of the waiting line
+    
+    printf("Total customers served: %d\n", (int) get_sum_statscounter(&total_customers));
+    printf("Time waiting in line: avg=%f, max=%f\n", get_avg_statscounter(&time_in_queue), get_max_statscounter(&time_in_queue));
+    printf("Line length: avg=%f, max=%f\n", get_avg_statscounter(&queue_length), get_max_statscounter(&queue_length));
 }
 
 
@@ -249,7 +276,9 @@ int main () {
     read_table_from_file("Proj2.dat");
 
     for (i = 4; i <= 7; i++) {
+        printf("Simulation for %d tellers:\n", i);
         simulation(i);
+        printf("\n");
     }
 
     return 0;

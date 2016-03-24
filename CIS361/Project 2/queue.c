@@ -7,6 +7,7 @@
 void init_queue(Queue* q) {
     q->head = NULL;
     q->tail = NULL;
+    q->size = 0;
 }
 
 
@@ -30,6 +31,7 @@ void enqueue(Queue* q, void* payload) {
     }
 
     q->tail = node;
+    q->size++;
 }
 
 
@@ -47,6 +49,7 @@ void* dequeue(Queue* q) {
         }
         payload = node->payload;
         free(node);
+        q->size--;
         return payload;
     }
 }

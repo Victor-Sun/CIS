@@ -1,0 +1,8 @@
+for classes in $(cat classes|awk '{print $1"##"$2}') ; do
+echo $classes 
+mkdir -v $(echo $classes |awk -F"##" '{print $1}' )
+cd ./$(echo $classes |awk  -F"##" '{print $1}')
+touch $(echo $classes |awk  -F"##"  '{print $2}')
+cd ..
+
+done

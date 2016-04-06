@@ -106,14 +106,14 @@ Find the dense rank of the salary 30000 among all salaries. Hint: The dense rank
 */
 
 SELECT DENSE_RANK(30000) WITHIN GROUP(ORDER BY Salary) AS "Dense Rank for 30000"
-FROM Employee E
+FROM Employee E;
 
 /*(150) DENSE RANK query ... compare with the previous query.
 Find the dense rank of the salary 31000 among all salaries. Hint: The dense ranks in our database are 1 for 25000, 2 for 30000, 3 for 38000, and so on.
 */
 
 SELECT DENSE_RANK(31000) WITHIN GROUP(ORDER BY Salary) AS "Dense Rank for 31000"
-FROM Employee E
+FROM Employee E;
 
 /*(155)HIERARCHICAL query (uses START WITH and CONNECT BY PRIOR)
 Find pairs of SSN's such that the first SSN in the pair is that of an employee while the second SSN in the pair is that of his/her supervisor. Start with SSN 453453453.
@@ -127,7 +127,7 @@ Hint: The output of your query should be:
 SELECT Ssn, Super_ssn
 FROM Employee
 START WITH Ssn = 453453453
-CONNECT BY PRIOR Super_ssn = ssn
+CONNECT BY PRIOR Super_ssn = ssn;
 ---------------------------------------------------------------
 SET ECHO OFF
 SPOOL OFF

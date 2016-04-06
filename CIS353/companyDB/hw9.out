@@ -7,14 +7,13 @@ SQL> Find the ssn, lname, and salary of only four employees.
 SQL> */
 SQL> SELECT Ssn, Lname, Salary
   2  FROM Employee
-  3  WHERE ROWNUM <= 4
-  4  ORDER BY Salary;
+  3  WHERE ROWNUM <= 4;
 
 SSN       LNAME               SALARY                                            
 --------- --------------- ----------                                            
-999887777 Zelaya               25000                                            
 123456789 Smith                30000                                            
 333445555 Wong                 40000                                            
+999887777 Zelaya               25000                                            
 987654321 Wallace              43000                                            
 
 SQL> 
@@ -78,13 +77,18 @@ SQL>
 SQL> --NEED TO FINISH
 SQL> SELECT DISTINCT Ssn, Lname, Salary
   2  FROM Employee
-  3  WHERE (SELECT * FROM (SELECT DISTINCT Salary FROM Employee E ORDER BY Salary ASC) WHERE ROWNUM <= 1) = Salary;
+  3  WHERE Salary = ANY (SELECT *
+  4  FROM (SELECT DISTINCT Salary
+  5  FROM Employee E
+  6  ORDER BY Salary ASC)
+  7  WHERE ROWNUM <= 2);
 
 SSN       LNAME               SALARY                                            
 --------- --------------- ----------                                            
-999887777 Zelaya               25000                                            
-453453453 English              25000                                            
 987987987 Jabbar               25000                                            
+453453453 English              25000                                            
+999887777 Zelaya               25000                                            
+123456789 Smith                30000                                            
 
 SQL> 
 SQL> /*(135) RANK query

@@ -1,4 +1,3 @@
-SQL> SET ECHO ON
 SQL> -- ---------------------------------------------------------------
 SQL> --
 SQL> -- Name: Victor Sun
@@ -6,15 +5,16 @@ SQL> --
 SQL> /*(110) Using ROWNUM to limit the size of the result. (Notice that SQL and some systems use the LIMIT or TOP clauses. Oracle uses ROWNUM to accomplish similar tasks.)
 SQL> Find the ssn, lname, and salary of only four employees.
 SQL> */
-SQL> SELECT E.Ssn, E.Lname, E.Salary
-  2  FROM Employee E
-  3  WHERE ROWNUM <= 4;
+SQL> SELECT Ssn, Lname, Salary
+  2  FROM Employee
+  3  WHERE ROWNUM <= 4
+  4  ORDER BY Salary;
 
 SSN       LNAME               SALARY                                            
 --------- --------------- ----------                                            
+999887777 Zelaya               25000                                            
 123456789 Smith                30000                                            
 333445555 Wong                 40000                                            
-999887777 Zelaya               25000                                            
 987654321 Wallace              43000                                            
 
 SQL> 
@@ -23,9 +23,9 @@ SQL> Find the ssn, lname, and salary of the four highest paid employees.
 SQL> */
 SQL> 
 SQL> SELECT *
-  2  FROM (SELECT E.Ssn, E.Lname, E.Salary
-  3  FROM Employee E
-  4  ORDER BY E.Salary DESC)
+  2  FROM (SELECT Ssn, Lname, Salary
+  3  FROM Employee
+  4  ORDER BY Salary DESC)
   5  WHERE ROWNUM <= 4;
 
 SSN       LNAME               SALARY                                            
@@ -41,9 +41,9 @@ SQL> Find the ssn, lname, and salary of the four lowest paid employees
 SQL> */
 SQL> 
 SQL> SELECT *
-  2  FROM (SELECT E.Ssn, E.Lname, E.Salary
-  3  FROM Employee E
-  4  ORDER BY E.Salary ASC)
+  2  FROM (SELECT Ssn, Lname, Salary
+  3  FROM Employee
+  4  ORDER BY Salary ASC)
   5  WHERE ROWNUM <= 4;
 
 SSN       LNAME               SALARY                                            
@@ -60,9 +60,9 @@ SQL> */
 SQL> --TODO: Look into
 SQL> 
 SQL> SELECT *
-  2  FROM (SELECT DISTINCT E.Salary
-  3  FROM Employee E
-  4  ORDER BY E.Salary ASC)
+  2  FROM (SELECT DISTINCT Salary
+  3  FROM Employee
+  4  ORDER BY Salary ASC)
   5  WHERE ROWNUM <= 2;
 
     SALARY                                                                      
@@ -76,9 +76,9 @@ SQL> For every employee whose salary is equal to one of the two lowest salaries,
 SQL> */
 SQL> 
 SQL> --NEED TO FINISH
-SQL> SELECT DISTINCT E.Ssn, E.Lname, E.Salary
-  2  FROM Employee E
-  3  WHERE (SELECT * FROM (SELECT DISTINCT E.Salary FROM Employee E ORDER BY E.Salary ASC) WHERE ROWNUM <= 1) = E.Salary;
+SQL> SELECT DISTINCT Ssn, Lname, Salary
+  2  FROM Employee
+  3  WHERE (SELECT * FROM (SELECT DISTINCT Salary FROM Employee E ORDER BY Salary ASC) WHERE ROWNUM <= 1) = Salary;
 
 SSN       LNAME               SALARY                                            
 --------- --------------- ----------                                            

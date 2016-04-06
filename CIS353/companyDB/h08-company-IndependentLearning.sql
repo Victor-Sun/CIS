@@ -32,7 +32,7 @@ After you have written the SQL code in the appropriate places, do the following:
 --
 */
 -- Please don't remove the SET ECHO command below.
-SPOOL company-IndependentLearning.out
+SPOOL hw9.out
 SET ECHO ON
 -- ---------------------------------------------------------------
 -- 

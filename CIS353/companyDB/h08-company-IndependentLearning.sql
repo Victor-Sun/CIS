@@ -41,18 +41,19 @@ SET ECHO ON
 /*(110) Using ROWNUM to limit the size of the result. (Notice that SQL and some systems use the LIMIT or TOP clauses. Oracle uses ROWNUM to accomplish similar tasks.)
 Find the ssn, lname, and salary of only four employees.
 */
-SELECT E.Ssn, E.Lname, E.Salary
-FROM Employee E
-WHERE ROWNUM <= 4;
+SELECT Ssn, Lname, Salary
+FROM Employee
+WHERE ROWNUM <= 4
+ORDER BY Salary;
 
 /*(115) TOP-N query.
 Find the ssn, lname, and salary of the four highest paid employees.
 */
 
 SELECT * 
-FROM (SELECT E.Ssn, E.Lname, E.Salary
-FROM Employee E
-ORDER BY E.Salary DESC)
+FROM (SELECT Ssn, Lname, Salary
+FROM Employee
+ORDER BY Salary DESC)
 WHERE ROWNUM <= 4;
 
 /*(120) TOP-N query.
@@ -60,9 +61,9 @@ Find the ssn, lname, and salary of the four lowest paid employees
 */
 
 SELECT * 
-FROM (SELECT E.Ssn, E.Lname, E.Salary
-FROM Employee E
-ORDER BY E.Salary ASC)
+FROM (SELECT Ssn, Lname, Salary
+FROM Employee
+ORDER BY Salary ASC)
 WHERE ROWNUM <= 4;
 
 /*(125) TOP-N query.
@@ -71,9 +72,9 @@ Find the lowest two salaries in the company.(Notice that in our database, the tw
 --TODO: Look into
 
 SELECT * 
-FROM (SELECT DISTINCT E.Salary
-FROM Employee E
-ORDER BY E.Salary ASC)
+FROM (SELECT DISTINCT Salary
+FROM Employee 
+ORDER BY Salary ASC)
 WHERE ROWNUM <= 2;
 
 /*(130) TOP-N query.
@@ -81,9 +82,9 @@ For every employee whose salary is equal to one of the two lowest salaries, Find
 */
 
 --NEED TO FINISH
-SELECT DISTINCT E.Ssn, E.Lname, E.Salary
-FROM Employee E
-WHERE (SELECT * FROM (SELECT DISTINCT E.Salary FROM Employee E ORDER BY E.Salary ASC) WHERE ROWNUM <= 1) = E.Salary;
+SELECT DISTINCT Ssn, Lname, Salary
+FROM Employee 
+WHERE (SELECT * FROM (SELECT DISTINCT Salary FROM Employee E ORDER BY Salary ASC) WHERE ROWNUM <= 1) = Salary;
 
 /*(135) RANK query
 Find the rank of the salary 30000 among all salaries. (HINT: The ranks in our database are 1 for 25000, 4 for 30000, 5 for 38000, and so on.)

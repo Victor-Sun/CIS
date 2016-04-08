@@ -29,19 +29,19 @@ done
 
 mkdir -p $junkDir
 
-if [ $optionL -eq 1 ]
+if [ $optionL = 1 ]
 	then
 		F=$(ls -al $junkDir)
 		echo "Files inside junk directory: $F"
 fi
 
-if [ $optionN -eq 1 ]
+if [ $optionN = 1 ]
 	then
 		N=$(find $junkDir -type f | wc -l)
 		echo "Number of files in junk directory: $N"
 fi
 
-if [ $optionH -eq 1]
+if [ $optionH = 1 ]
 	then
 		show_help
 fi
@@ -53,7 +53,7 @@ if [ -z $list ]
 			if [ -d $file ]
 				echo "Directories are now allowed to be moved!"
 				echo "Use --help for usage information."
-			else 
+			else
 				if [ -f $file ]
 					then
 						mv $file $junkDir

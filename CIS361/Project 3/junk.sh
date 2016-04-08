@@ -55,10 +55,7 @@ if [ -z $list ]
                 echo "Directories are now allowed to be moved!"
                 echo "Use --help for usage information."
             else
-                if [ -f $file ]
-                    then
-                        mv $file $junkDir
-                fi
+                mv $file $junkDir
             fi
         done
     exit 0

@@ -51,6 +51,7 @@ if [ -z $list ]
         for file in $list
         do
             if [ -d $file ]
+                then
                 echo "Directories are now allowed to be moved!"
                 echo "Use --help for usage information."
             else

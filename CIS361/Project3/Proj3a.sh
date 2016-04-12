@@ -1,7 +1,8 @@
 #!/bin/bash
 
-currDir=$(pwd)
-junkDir="~/.junk"
+currDir="$(pwd)"
+#junkDir="~/.junk"  # Bug!
+junkDir="${HOME}/.junk"
 
 show_help(){
 	cat <<EOF
@@ -18,11 +19,11 @@ fi
 #for cmdArg in $*
 for cmdArg in "$@"
 do
-	case $cmdArg in
+	case "$cmdArg" in
 		"-l") optionL=1;;
 		"-n") optionN=1;;
 		"--help") optionH=1;;
-		*) list="$list $cmdArg";;   # Hate this... :)
+		*) list="$list $cmdArg";;
 	esac
 done
 
@@ -32,9 +33,9 @@ if [ "$optionH" = "1" ]
 		exit
 fi
 
-if [ ! -d $junkDir ]
+if [ ! -d "$junkDir" ]
 	then
-		mkdir -p $junkDir
+		mkdir -p "$junkDir"
 fi
 
 if [ "$optionL" = "1" ]
@@ -42,25 +43,25 @@ if [ "$optionL" = "1" ]
 		# F=$(ls -al $junkDir)
 		# echo "Files inside junk directory: $F"
 		echo "Files inside junk directory: "
-		ls -al $junkDir
+		ls -al "$junkDir"
 fi
 
 if [ "$optionN" = "1" ]
 	then
-		N=$(find $junkDir -type f | wc -l)
+		N="$(find "$junkDir" -type f | wc -l)"
 		echo "Number of files in junk directory: $N"
 fi
 
-if [ -n $list ]
+if [ -n "$list" ]
 	then 
-		for file in $list
+		for file in $list  # Bug!
 		do
-			if [ -d $file ]
+			if [ -d "$file" ]
 				then
 				echo "Directories are now allowed to be moved!"
 				echo "Use --help for usage information."
 			else
-				mv $file $junkDir
+				mv "$file" "$junkDir"
 			fi
 		done
 	exit 0

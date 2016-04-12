@@ -12,18 +12,25 @@ EOF
 if [ $# -eq 0 ]
 	then
 		echo "Not enough arguments, use --help to see usage."
-		exit s
+		exit 1
 fi
 
-for cmdArg in $*
+#for cmdArg in $*
+for cmdArg in "$@"
 do
 	case $cmdArg in
 		"-l") optionL=1;;
 		"-n") optionN=1;;
 		"--help") optionH=1;;
-		*) list="$list $cmdArg";;
+		*) list="$list $cmdArg";;   # Hate this... :)
 	esac
 done
+
+if [ "$optionH" = "1" ]
+	then
+		show_help
+		exit
+fi
 
 if [ ! -d $junkDir ]
 	then
@@ -32,8 +39,10 @@ fi
 
 if [ "$optionL" = "1" ]
 	then
-		F=$(ls -al $junkDir)
-		echo "Files inside junk directory: $F"
+		# F=$(ls -al $junkDir)
+		# echo "Files inside junk directory: $F"
+		echo "Files inside junk directory: "
+		ls -al $junkDir
 fi
 
 if [ "$optionN" = "1" ]
@@ -42,12 +51,7 @@ if [ "$optionN" = "1" ]
 		echo "Number of files in junk directory: $N"
 fi
 
-if [ "$optionH" = "1" ]
-	then
-		show_help
-fi
-
-if [ -z $list ]
+if [ -n $list ]
 	then 
 		for file in $list
 		do

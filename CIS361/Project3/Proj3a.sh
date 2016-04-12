@@ -23,7 +23,10 @@ do
 		"-l") optionL=1;;
 		"-n") optionN=1;;
 		"--help") optionH=1;;
-		*) list="$list $cmdArg";;
+		*) list="$list $cmdArg";;   # BUGGY with filenames with whitespace.
+		# https://github.com/denilsonsa/prettyping/blob/master/prettyping
+		# Lines 99, 162, 168
+		# Line 219 -> to use at the for loop, down below.
 	esac
 done
 

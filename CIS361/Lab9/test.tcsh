@@ -11,9 +11,8 @@ set sum = 0
 set count = 0
 set avg = 0
 foreach i ($argv[*])
-	@ sum += $argv[i]
+	@ sum += $i
 	@ count++
-	echo "$i"
 end
 @ avg = $sum / $count
 

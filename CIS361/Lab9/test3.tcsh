@@ -19,7 +19,7 @@ set count = 0
 set avg = 0
 set index = 1
 while ( $index < $num )
-	if ( $max < $list[$index]) then
+	if ( $list[$index] > $max ) then
 		@ max = $list[$index]
 	endif 	
 	@ index++

@@ -28,7 +28,7 @@ CREATE TABLE artist (
 
 CREATE TABLE albums (
 	album_id INTEGER PRIMARY KEY,
-	title VARCHAR2(15),
+	title VARCHAR2(50),
 	release_date DATE,
 	artist_id INTEGER,
 	CONSTRAINT con_artist FOREIGN KEY (artist_id) REFERENCES artist(artist_id)
@@ -37,7 +37,7 @@ CREATE TABLE albums (
 
 CREATE TABLE tracks (
 	track_id INTEGER PRIMARY KEY,
-	title VARCHAR2(15) NOT NULL,
+	title VARCHAR2(50) NOT NULL,
 	album_id INTEGER ,
 	CONSTRAINT con_album FOREIGN KEY (album_id) REFERENCES albums(album_id)
 );
@@ -76,11 +76,11 @@ Failed Inserts
 */
 
 INSERT INTO tracks (track_id, title, album_id)
-VALUES (1, NULL, 3, 3);
+VALUES (1, NULL, 3);
 --
 
 INSERT INTO albums (album_id, title, release_date, artist_id)
-VALUES (3, 'Name','1111-11-11', 3);
+VALUES (3, 'Name', to_date('June-30-2014', 3);
 --
 SELECT *
 FROM tracks

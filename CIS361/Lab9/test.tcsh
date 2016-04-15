@@ -1,8 +1,8 @@
-#! /bin/tcsh
+#!/bin/tcsh
 
-#TODO: check if input is a number
+# TODO: check if input is a number
 
-if ( $#argv == 0 || $#argv > 7) then
+if ($#argv == 0 || $#argv > 7) then
 	echo "Wrong number of inputs."
 	exit 1
 endif
@@ -13,7 +13,7 @@ set avg = 0
 foreach i ($argv[*])
 	@ sum += $argv[i]
 	@ count++
-	echo $i
+	echo "$i"
 end
 @ avg = $sum / $count
 

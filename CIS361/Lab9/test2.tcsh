@@ -20,6 +20,7 @@ set index = 1
 while ( $index < $num )
 	@ sum += $list[$index]
 	@ count++
+	@ index++
 end
 
 @ avg = $sum / $count

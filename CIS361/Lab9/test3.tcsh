@@ -22,6 +22,7 @@ while ( $index < $num )
 	if ( $max < $list[$index]) then
 		@ max = $list[$index]
 	endif 	
+	@ index++
 end
 
 echo "Largest input: $max"

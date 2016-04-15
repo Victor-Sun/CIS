@@ -75,11 +75,11 @@ VALUES (2, 'Rude', 2, 4);
 Failed Inserts
 */
 
-INSERT INTO tracks (track_id, title, album_id)
+INSERT INTO tracks
 VALUES (1, NULL, 3);
 --
 
-INSERT INTO albums (album_id, title, release_date, artist_id)
+INSERT INTO albums
 VALUES (3, 'Name', to_date('June-30-2014', 3);
 --
 SELECT *

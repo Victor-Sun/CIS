@@ -21,7 +21,7 @@ set index = 1
 while ( $index <= $num )
 	if ( $list[$index] > $max ) then
 		@ max = $list[$index]
-	endif 	
+	endif 
 	@ index++
 end
 

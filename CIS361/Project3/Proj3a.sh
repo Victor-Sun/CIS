@@ -6,6 +6,10 @@ junkDir="${HOME}/.junk"
 
 show_help(){
 	cat <<EOF
+Usage: junk [OPTION] ... [FILE] ...
+Move FILE to the junk folder to be removed. 
+
+
 TODO: Help message + Command options + Usage
 EOF
 }

@@ -59,10 +59,10 @@ VALUES (2, NULL, 'Magic!');
 --
 
 INSERT INTO albums
-VALUES (1, 'Chicago 17', 'May-14-1984', 1);
+VALUES (1, 'Chicago 17', to_date('May-14-1984', 'MM-DD-YYYY'), 1);
 
 INSERT INTO albums
-VALUES (2, 'Dont kill the magic', 'June-30-2014', 1);
+VALUES (2, 'Dont kill the magic', to_date('June-30-2014', 'MM-DD-YYYY'), 1);
 --
 
 INSERT INTO tracks

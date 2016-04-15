@@ -1,17 +1,11 @@
 SQL> 
 SQL> DROP TABLE tracks;
-DROP TABLE tracks
-           *
-ERROR at line 1:
-ORA-00942: table or view does not exist 
 
+Table dropped.
 
 SQL> DROP TABLE albums;
-DROP TABLE albums
-           *
-ERROR at line 1:
-ORA-00942: table or view does not exist 
 
+Table dropped.
 
 SQL> DROP TABLE artist;
 
@@ -82,17 +76,14 @@ SQL> INSERT INTO artist
 SQL> --
 SQL> 
 SQL> INSERT INTO albums
-  2  VALUES (1, 'Chicago 17', 'May-14-1984', 1);
-VALUES (1, 'Chicago 17', 'May-14-1984', 1)
-                         *
-ERROR at line 2:
-ORA-01858: a non-numeric character was found where a numeric was expected 
+  2  VALUES (1, 'Chicago 17', to_date('May-14-1984', 'MM-DD-YYYY'), 1);
 
+1 row created.
 
 SQL> 
 SQL> INSERT INTO albums
-  2  VALUES (2, 'Dont kill the magic', 'June-30-2014', 1);
-VALUES (2, 'Dont kill the magic', 'June-30-2014', 1)
+  2  VALUES (2, 'Dont kill the magic', to_date('June-30-2014', 'MM-DD-YYYY'), 1);
+VALUES (2, 'Dont kill the magic', to_date('June-30-2014', 'MM-DD-YYYY'), 1)
            *
 ERROR at line 2:
 ORA-12899: value too large for column "SUNVI"."ALBUMS"."TITLE" (actual: 19, 

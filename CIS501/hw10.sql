@@ -9,7 +9,7 @@
 --x Use the ALTER command to add an integrity constraint to Artists to ensure the lastname, firstname combination is unique.
 --x Use INSERT commands to insert at least two albums, two artists, and at least two tracks per album.
 --x Use an INSERT command (that will fail when run) to show that you cannot enter a track with without a title.
--- Use an INSERT command (that will fail when run) to show that you cannot add an album with an artist that doesn’t exist. 
+--x Use an INSERT command (that will fail when run) to show that you cannot add an album with an artist that doesn’t exist. 
 -- Write a query to select the all the track titles with a rating greater than or equal to 4.
 
 CREATE TABLE artist (
@@ -69,9 +69,13 @@ Failed Inserts
 */
 
 INSERT INTO tracks (track_id, title, album_id)
-VALUES (1, ,3);
+VALUES (1, NULL, 3, 3);
 --
 
 INSERT INTO albums (album_id, title, release_date, artist_id)
 VALUES (3, 'Name','1111-11-11', 3);
+--
+SELECT *
+FROM tracks
+WHERE rating >= 4;
 --

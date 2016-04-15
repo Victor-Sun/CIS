@@ -1,0 +1,155 @@
+SQL> 
+SQL> DROP TABLE tracks;
+DROP TABLE tracks
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> DROP TABLE albums;
+DROP TABLE albums
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> DROP TABLE artist;
+
+Table dropped.
+
+SQL> 
+SQL> CREATE TABLE artist (
+  2  	     artist_id INTEGER PRIMARY KEY,
+  3  	     fname VARCHAR2(15),
+  4  	     lname VARCHAR2(15) NOT NULL
+  5  );
+
+Table created.
+
+SQL> --
+SQL> 
+SQL> CREATE TABLE albums (
+  2  	     album_id INTEGER PRIMARY KEY,
+  3  	     title VARCHAR2(15),
+  4  	     release_date DATE,
+  5  	     artist_id INTEGER,
+  6  	     CONSTRAINT con_artist FOREIGN KEY (artist_id) REFERENCES artist(artist_id)
+  7  );
+
+Table created.
+
+SQL> --
+SQL> 
+SQL> CREATE TABLE tracks (
+  2  	     track_id INTEGER PRIMARY KEY,
+  3  	     title VARCHAR2(15) NOT NULL,
+  4  	     album_id INTEGER ,
+  5  	     CONSTRAINT con_album FOREIGN KEY (album_id) REFERENCES albums(album_id)
+  6  );
+
+Table created.
+
+SQL> --
+SQL> 
+SQL> ALTER TABLE tracks ADD rating INTEGER;
+
+Table altered.
+
+SQL> ALTER TABLE tracks ADD CONSTRAINT tRating CHECK(rating >= 0 AND rating < 6);
+
+Table altered.
+
+SQL> ALTER TABLE artist ADD CONSTRAINT aUnique UNIQUE (fname,lname);
+
+Table altered.
+
+SQL> --
+SQL> /*
+SQL> Accepted Inserts
+SQL> */
+SQL> 
+SQL> INSERT INTO artist
+  2  VALUES (1, NULL, 'Chicago');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO artist
+  2  VALUES (2, NULL, 'Magic!');
+
+1 row created.
+
+SQL> --
+SQL> 
+SQL> INSERT INTO albums
+  2  VALUES (1, 'Chicago 17', 'May-14-1984', 1);
+VALUES (1, 'Chicago 17', 'May-14-1984', 1)
+                         *
+ERROR at line 2:
+ORA-01858: a non-numeric character was found where a numeric was expected 
+
+
+SQL> 
+SQL> INSERT INTO albums
+  2  VALUES (2, 'Dont kill the magic', 'June-30-2014', 1);
+VALUES (2, 'Dont kill the magic', 'June-30-2014', 1)
+           *
+ERROR at line 2:
+ORA-12899: value too large for column "SUNVI"."ALBUMS"."TITLE" (actual: 19, 
+maximum: 15) 
+
+
+SQL> --
+SQL> 
+SQL> INSERT INTO tracks
+  2  VALUES (1, 'Your the Inspiration', 1, 5);
+VALUES (1, 'Your the Inspiration', 1, 5)
+           *
+ERROR at line 2:
+ORA-12899: value too large for column "SUNVI"."TRACKS"."TITLE" (actual: 20, 
+maximum: 15) 
+
+
+SQL> 
+SQL> INSERT INTO tracks
+  2  VALUES (2, 'Rude', 2, 4);
+INSERT INTO tracks
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SUNVI.CON_ALBUM) violated - parent key not 
+found 
+
+
+SQL> --
+SQL> /*
+SQL> Failed Inserts
+SQL> */
+SQL> 
+SQL> INSERT INTO tracks (track_id, title, album_id)
+  2  VALUES (1, NULL, 3, 3);
+INSERT INTO tracks (track_id, title, album_id)
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> --
+SQL> 
+SQL> INSERT INTO albums (album_id, title, release_date, artist_id)
+  2  VALUES (3, 'Name','1111-11-11', 3);
+VALUES (3, 'Name','1111-11-11', 3)
+                  *
+ERROR at line 2:
+ORA-01861: literal does not match format string 
+
+
+SQL> --
+SQL> SELECT *
+  2  FROM tracks
+  3  WHERE rating >= 4;
+
+no rows selected
+
+SQL> --
+SQL> 
+SQL> SET ECHO OFF

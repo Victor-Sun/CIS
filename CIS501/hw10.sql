@@ -12,8 +12,12 @@
 --x Use an INSERT command (that will fail when run) to show that you cannot add an album with an artist that doesn’t exist. 
 -- Write a query to select the all the track titles with a rating greater than or equal to 4.
 
-SPOOL hw9.out
+SPOOL hw10.out
 SET ECHO ON
+
+DROP TABLE tracks;
+DROP TABLE albums;
+DROP TABLE artist;
 
 CREATE TABLE artist (
 	artist_id INTEGER PRIMARY KEY,

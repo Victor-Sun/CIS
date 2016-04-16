@@ -37,7 +37,7 @@ BEGIN
 
 		EXCEPTION
 			WHEN belowAllowedMin THEN
-				DBMS_OUTPUT.PUT_LINE ('----- Boat:'||br.bid||': Update rejected. The new rate would have been'||br.rate);
+				DBMS_OUTPUT.PUT_LINE ('----- Boat:'||br.bid||': Update rejected. The new rate would have been '||br.rate);
 			WHEN OTHERS THEN
 				DBMS_OUTPUT.PUT_LINE ('----- Update rejected: '||SQLCODE||'...'||SQLERRM);
 		END;

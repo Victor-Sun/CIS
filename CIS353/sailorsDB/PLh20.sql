@@ -20,16 +20,16 @@ BEGIN
 		
 		-- Print old boat rating
 		DBMS_OUTPUT.PUT_LINE ('+++++ Boat:'||br.bid||': old rate = '||br.rate);
-		br.rating := br.rating - &rateDecrement;
+		br.rate := br.rate - &rateDecrement;
 		
 		--
 		DECLARE
 			belowAllowedMin EXCEPTION;
 		BEGIN
-			IF br.rating < &allowedMinRate
+			IF br.rate < &allowedMinRate
 			THEN RAISE belowAllowedMin;
 			ELSE UPDATE boats
-				SET rating = br.rating
+				SET rate = br.rate
 				WHERE boats.bid = br.bid;
 				-- Print new boat record
 				DBMS_OUTPUT.PUT_LINE ('----- Boat:'||br.bid||': new rate = '||br.rate);

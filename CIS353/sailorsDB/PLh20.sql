@@ -22,19 +22,23 @@ BEGIN
 		DBMS_OUTPUT.PUT_LINE ('+++++ Boat:'||br.bid||': old rate = '||br.rate);
 		br.rate := br.rate - &rateDecrement;
 		
-		--
+		-- Exception declaration
 		DECLARE
 			belowAllowedMin EXCEPTION;
+
+		-- Check if decrementing will make rate below limit
 		BEGIN
 			IF br.rate < &allowedMinRate
 			THEN RAISE belowAllowedMin;
 			ELSE UPDATE boats
+				-- If check is accepted column is updated with new rate
 				SET rate = br.rate
 				WHERE boats.bid = br.bid;
 				-- Print new boat record
 				DBMS_OUTPUT.PUT_LINE ('----- Boat:'||br.bid||': new rate = '||br.rate);
 			END IF;
 
+			--Exceptions
 		EXCEPTION
 			WHEN belowAllowedMin THEN
 				DBMS_OUTPUT.PUT_LINE ('----- Boat:'||br.bid||': Update rejected. The new rate would have been '||br.rate);

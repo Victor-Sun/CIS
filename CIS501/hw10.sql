@@ -80,7 +80,7 @@ VALUES (1, NULL, 3);
 --
 
 INSERT INTO albums
-VALUES (3, 'Name', to_date('June-30-2014', 3);
+VALUES (3, 'Name', to_date('June-30-2014'), 3);
 --
 SELECT *
 FROM tracks

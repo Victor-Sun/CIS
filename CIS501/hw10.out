@@ -104,9 +104,9 @@ SQL> /*
 SQL> Failed Inserts
 SQL> */
 SQL> 
-SQL> INSERT INTO tracks (track_id, title, album_id)
-  2  VALUES (1, NULL, 3);
-VALUES (1, NULL, 3)
+SQL> INSERT INTO tracks
+  2  VALUES (1, NULL, 3, 1);
+VALUES (1, NULL, 3, 1)
            *
 ERROR at line 2:
 ORA-01400: cannot insert NULL into ("SUNVI"."TRACKS"."TITLE") 
@@ -114,12 +114,13 @@ ORA-01400: cannot insert NULL into ("SUNVI"."TRACKS"."TITLE")
 
 SQL> --
 SQL> 
-SQL> INSERT INTO albums (album_id, title, release_date, artist_id)
-  2  VALUES (3, 'Name', to_date('June-30-2014', 3);
-VALUES (3, 'Name', to_date('June-30-2014', 3)
-                                            *
-ERROR at line 2:
-ORA-00917: missing comma 
+SQL> INSERT INTO albums
+  2  VALUES (3, 'Name', to_date('June-30-2014','MM-DD-YYYY'), 3);
+INSERT INTO albums
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SUNVI.CON_ARTIST) violated - parent key not 
+found 
 
 
 SQL> --

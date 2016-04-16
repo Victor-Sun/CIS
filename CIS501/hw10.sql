@@ -76,11 +76,11 @@ Failed Inserts
 */
 
 INSERT INTO tracks
-VALUES (1, NULL, 3);
+VALUES (1, NULL, 3, 1);
 --
 
 INSERT INTO albums
-VALUES (3, 'Name', to_date('June-30-2014'), 3);
+VALUES (3, 'Name', to_date('June-30-2014','MM-DD-YYYY'), 3);
 --
 SELECT *
 FROM tracks

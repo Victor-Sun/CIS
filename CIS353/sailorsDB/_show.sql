@@ -1,4 +1,4 @@
-SET ECHO ON
+SET ECHO ON 
 -- Show my schema objects
 --
 -- TABLES AND VIEWS
@@ -30,3 +30,4 @@ SELECT * FROM Boats;
 SELECT * FROM Reservations;
 SELECT * FROM LazySailors;
 SET ECHO OFF
+

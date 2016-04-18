@@ -35,7 +35,7 @@ CREATE TABLE albums (
 CREATE TABLE tracks (
 	track_id INTEGER PRIMARY KEY,
 	title VARCHAR2(50) NOT NULL,
-	album_id INTEGER ,
+	album_id INTEGER,
 	CONSTRAINT con_album FOREIGN KEY (album_id) REFERENCES albums(album_id)
 );
 --

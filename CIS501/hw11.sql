@@ -20,7 +20,7 @@ SELECT title
 FROM tracks
 WHERE rating >= 4;
 
-SELECT 
+SELECT COUNT(*)
 FROM
 
 SET ECHO OFF

@@ -1,3 +1,11 @@
+-- File: create.sql
+/*
+This script creates the TABLES and adds the CONSTRAINTS for the SQL Project 
+BY: Victor Sun
+	_______
+	_______
+	_______
+*/
 create table Location (
 	location_id INTEGER PRIMARY KEY,
 	location_name VARCHAR(50) NOT NULL,

@@ -1,16 +1,33 @@
 #!/bin/bash
 
 currDir="$(pwd)"
-#junkDir="~/.junk"  # Bug!
 junkDir="${HOME}/.junk"
 
 show_help(){
 	cat <<EOF
-Usage: junk [OPTION] ... [FILE] ...
-Move FILE to the junk folder to be removed. 
+NAME
+	Proj3a.sh - move files to junk folder
 
+SYNOPSIS
+	Proj3a.sh [OPTION] ... [FILE] ...
 
-TODO: Help message + Command options + Usage
+DESCRIPTION
+	Move FILE(S) to the .junk folder
+	Multiple optiosn can be used, and options and the file can be used
+
+OPTIONS
+	Move the file to the .junk folder
+
+	-l
+		Lists the files in the .junk folder
+	-n
+		Display the number of files inside the junk folder
+
+Author
+	Written by Victor Sun and Chad Mersino
+
+COPYRIGHT
+	NO COPYRIGHT
 EOF
 }
 
@@ -27,10 +44,7 @@ do
 		"-l") optionL=1;;
 		"-n") optionN=1;;
 		"--help") optionH=1;;
-		*) list="$list $cmdArg";;   # BUGGY with filenames with whitespace.
-		# https://github.com/denilsonsa/prettyping/blob/master/prettyping
-		# Lines 99, 162, 168
-		# Line 219 -> to use at the for loop, down below.
+		*) list="$list $cmdArg";;
 	esac
 done
 
@@ -47,8 +61,6 @@ fi
 
 if [ "$optionL" = "1" ]
 	then
-		# F=$(ls -al $junkDir)
-		# echo "Files inside junk directory: $F"
 		echo "Files inside junk directory: "
 		ls -al "$junkDir"
 fi
@@ -61,7 +73,7 @@ fi
 
 if [ -n "$list" ]
 	then 
-		for file in $list  # Bug!
+		for file in $list
 		do
 			if [ -d "$file" ]
 				then

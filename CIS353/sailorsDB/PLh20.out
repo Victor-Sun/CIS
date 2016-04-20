@@ -1,0 +1,23 @@
+SQL> @PLh20
+Enter the rate decrement: 55
+Enter the allowed min. rate: 200
++++++ Boat:101: old rate = 350                                                  
+----- Update rejected: -2290...ORA-02290: check constraint (SUNVI.BIC4) violated
++++++ Boat:102: old rate = 275                                                  
+----- Boat:102: new rate = 220                                                  
++++++ Boat:103: old rate = 160                                                  
+----- Boat:103: Update rejected. The new rate would have been 105               
++++++ Boat:104: old rate = 195                                                  
+----- Boat:104: Update rejected. The new rate would have been 140               
++++++ Boat:105: old rate = 500                                                  
+----- Boat:105: new rate = 445                                                  
++++++ Boat:106: old rate = 300                                                  
+----- Boat:106: new rate = 245                                                  
++++++ Boat:107: old rate = 350                                                  
+----- Update rejected: -2290...ORA-02290: check constraint (SUNVI.BIC4) violated
++++++ Boat:108: old rate = 100                                                  
+----- Boat:108: Update rejected. The new rate would have been 45                
+
+PL/SQL procedure successfully completed.
+
+SQL> SPOOL OFF

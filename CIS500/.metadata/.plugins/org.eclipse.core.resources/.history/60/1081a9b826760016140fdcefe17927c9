@@ -1,0 +1,18 @@
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class PointTest {
+
+	@Test
+	public void contructorTest1() {
+		Point p = new Point();
+		assertEquals(p.getX(),0);
+		assertEquals(p.getY(),0);
+	}
+	public void contructorTest2() {
+		Point p = new Point(5,10);
+		assertEquals(p.getX(),5);
+		assertEquals(p.getY(),010);
+	}
+}

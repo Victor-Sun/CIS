@@ -49,7 +49,7 @@ public class Point {
 	 * @return the x coordinate of this object.
 	 */
 	public int getX() {
-		return x;
+		return this.x;
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class Point {
 	 * @return the y coordinate of this object.
 	 */
 	public int getY() {
-		return y;
+		return this.y;
 	}
 
 	/**

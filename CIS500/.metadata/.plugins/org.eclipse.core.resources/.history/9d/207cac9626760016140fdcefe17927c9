@@ -1,0 +1,13 @@
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class PointTest {
+
+	@Test
+	public void contructorTest() {
+		Point p = new Point();
+		assertEquals(p,"(0,0)");
+	}
+
+}

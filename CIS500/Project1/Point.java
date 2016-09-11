@@ -2,45 +2,34 @@ public class Point {
 
 	private int x;
 	private int y;
-	
+
 	/**
-	 * Initializes a newly created Point object with x and y
-	 * coordinates set to 0.
+	 * Initializes a newly created Point object with x and y coordinates set to 0.
 	 */
 	public Point() {
-
+		this.x = 0;
+		this.y = 0;
 	}
 	
 	/**
-	 * Initializes a newly created Point object with the given 
-	 * values.
+	 * Initializes a newly created Point object with the given values.
 	 * 
 	 * @param x the x coordinate of this point
 	 * @param y the y coordinate of this point
 	 */
 	public Point(int x, int y) {
-
+		this.x = x;
+		this.y = y;
 	}
 	
 	/**
-	 * Initializes a newly created Point object with the values 
-	 * from the input string.
+	 * Initializes a newly created Point object with the values from the input Point object.
 	 * 
-	 * @param str string containing values of coordinates
-	 */
-	public Point(String str) {
-
-	}
-	
-	/**
-	 * Initializes a newly created Point object with the values 
-	 * from the input Point object.
-	 * 
-	 * @param other a Point object used to initialize this Point 
-	 * object
+	 * @param other a Point object used to initialize this Point object
 	 */
 	public Point(Point other) {
-
+		this.x = other.x;
+		this.y = other.y;
 	}
 	
 	/**
@@ -49,7 +38,7 @@ public class Point {
 	 * @return the x coordinate of this object.
 	 */
 	public int getX() {
-		return this.x;
+		return this.x;	
 	}
 
 	/**
@@ -68,41 +57,30 @@ public class Point {
 	 * @return a string representation of this Point's value.
 	 */
 	public String toString() {
-		// TO DO
-		return null;
+		return "(" + this.x + "," + this.y + ")";	
 	}
 	
 	/**
-	 * Compares this object to the other object. The result is 
-	 * true if and only if the argument is not null and is a 
-	 * Point object that contains the same values as this Point 
-	 * object.
+	 * Compares this object to the other object. The result is true if and
+	 * only if the argument is not null and is a Point object that contains the
+	 * same values as this Point object.
 	 * 
 	 * @param obj the object to compare with.
 	 * 
-	 * @return true if the objects are the same; false 
-	 * otherwise.
+	 * @return true if the objects are the same; false otherwise.
 	 */
 	public boolean equals(Object other) {
-		// TO DO
+		if (other == null || !(other instanceof Point))
+			return false;
+		Point p = (Point) other;
+
+		if(p.getX() == this.getX()){
+			if(p.getY() == this.getY())
+				return true;
+		} else
+			return false;
 		return false;
-	}
-	
-	/**
-	 * Returns the Manhattan distance between this Point object 
-	 * and the other Point object.
-	 * 
-	 * Manhattan distance is the distance between two points if 
-	 * you walk only in a horizontal or vertical direction.
-	 * 
-	 * @param other the other Point object
-	 * 
-	 * @return the Manhattan distance between this and other 
-	 * Point objects.
-	 */
-	public int manhattanDistance(Point other) {
-		// TO DO
-		return 0;
+		
 	}
 	
 }

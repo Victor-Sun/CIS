@@ -10,7 +10,7 @@ public class Line {
 	 * @param y1 and y2 the y coordinates of p1 and p2 
 	 */
 	public Line(double x1, double y1, double x2, double y2) {
-
+		p1
 	}
 
 	/**
@@ -21,7 +21,8 @@ public class Line {
 	 * this Line object
 	 */
 	public Line(Point p1, Point p2) {
-
+		this.p1 = p1;
+		this.p2 = p2;
 	}
 
 	/**
@@ -45,7 +46,6 @@ public class Line {
 	 * @return the distance
 	 */
 	public double getDistance() {
-		// TO DO
 		return 0.0;
 	}
 

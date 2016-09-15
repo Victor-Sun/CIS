@@ -9,8 +9,9 @@ public class Line {
 	 * @param x1 and x2 the x coordinates of p1 and p2 
 	 * @param y1 and y2 the y coordinates of p1 and p2 
 	 */
-	public Line(double x1, double y1, double x2, double y2) {
-		p1
+	public Line(int x1, int y1, int x2, int y2) {
+		this.p1 = new Point(x1,y1);
+		this.p2 = new Point(x2,y2);
 	}
 
 	/**
@@ -35,8 +36,15 @@ public class Line {
 	 * @return the slope of this Line object
 	 */
 	public double getSlope() {
-		// TO DO
-		return 0.0;
+		int slope = 0;
+		slope = (p1.getY() - p2.getY())/(p1.getX() - p2.getX());
+		if(this.p1.getX() == this.p2.getX()){
+			ArithmeticException e = new ArithmeticException();
+			throw e;
+		}
+		else {
+			return slope;
+		}
 	}
 
 	/**
@@ -46,7 +54,13 @@ public class Line {
 	 * @return the distance
 	 */
 	public double getDistance() {
-		return 0.0;
+		int d1, d2, distance;
+		d1 = p1.getX()+p1.getY();
+		d2 = p2.getX()+p2.getX();
+		
+		distance = d1-d2;
+		
+		return distance;
 	}
 
 	/**

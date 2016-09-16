@@ -3,6 +3,14 @@ public class Line {
 	private Point p1, p2;
 
 	/**
+	 * Initializes a newly created Point object with x and y coordinates set to 0.
+	 */
+	public Line(){
+		this.p1 = new Point();
+		this.p2 = new Point();
+	}
+
+	/**
 	 * Initializes a newly created Line object with the given 
 	 * values.
 	 * 
@@ -25,6 +33,39 @@ public class Line {
 		this.p1 = p1;
 		this.p2 = p2;
 	}
+
+	/**
+	 * Initializes a newly created Point object with the values from the input Point object.
+	 * 
+	 * @param other a Point object used to initialize this Point object
+	 */
+	public Line(Line other){
+		this.p1 = other.getP1();
+		this.p2 = other.getP2();
+	}
+	/**
+	 * Returns the point coordinate of this Line object.
+	 * 
+	 * @return the point p1 coordinate of this object.
+	 */
+	public Point getP1(){
+		return this.p1;
+	}
+
+	/**
+	 * Returns the point coordinate of this Line object.
+	 * 
+	 * @return the point p2 coordinate of this object.
+	 */
+	public Point getP2(){
+		return this.p2;
+	}
+
+	/**
+	 * Returns the y coordinate of this Point object.
+	 * 
+	 * @return the y coordinate of this object.
+	 */
 
 	/**
 	 * Calculate the slope of this Line object using the  
@@ -57,9 +98,8 @@ public class Line {
 		int d1, d2, distance;
 		d1 = p1.getX()+p1.getY();
 		d2 = p2.getX()+p2.getX();
-		
-		distance = d1-d2;
-		
+		distance = Math.abs(d1-d2);
+
 		return distance;
 	}
 
@@ -69,8 +109,14 @@ public class Line {
 	 * @return a Point object
 	 */
 	public Point getMidpoint() {
-		// TO DO
-		return null;
+		Point midpoint;
+		int midX,midY;
+
+		midX = (this.p1.getX() + this.p2.getX()) / 2;
+		midY = (this.p1.getY() + this.p2.getY()) / 2;
+
+		midpoint = new Point(midX,midY);
+		return midpoint;
 	}
 	
 	/**
@@ -84,7 +130,9 @@ public class Line {
 	 * otherwise.  
 	 */ 
 	public boolean parallelTo(Line line) {
-		// TO DO
+		if (this.getSlope() == line.getSlope()){
+			return true;
+		}
 		return false;
 	}
 
@@ -99,7 +147,16 @@ public class Line {
 	 * otherwise.
 	 */
 	public boolean equals(Object obj) {
-		// TO DO
+		if (obj == null || !(obj instanceof Line)){
+			return false;
+		}
+		Line l = (Line) obj;
+		if(this.p1.getX() == l.p1.getX() 
+				&& this.p1.getY() == l.p1.getY()
+				&& this.p2.getX() == l.p2.getX() 
+				&& this.p2.getY() == l.p2.getY()){
+			return true;
+		}
 		return false;
 	}
 	

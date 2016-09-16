@@ -77,8 +77,7 @@ public class Point {
 		if(p.getX() == this.getX()){
 			if(p.getY() == this.getY())
 				return true;
-		} else
-			return false;
+		}
 		return false;
 		
 	}

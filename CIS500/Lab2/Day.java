@@ -151,9 +151,12 @@ public class Day
 		if (year <= 0) --year;
 		return new int[] { year, month, date };
 	}
-
+	/**
+	 *	Returns the day in a readable format
+	 *
+	 * @return the date in a readable format	
+	 * */
+	public String toString(){
+		return "" + getMonth() + '/' + getDate() + '/' + getYear();
+	}
 }
-
-
-
-

@@ -77,13 +77,13 @@ public class Line {
 	 * @return the slope of this Line object
 	 */
 	public double getSlope() {
-		int slope = 0;
-		slope = (p1.getY() - p2.getY())/(p1.getX() - p2.getX());
+		double slope = 0;
 		if(this.p1.getX() == this.p2.getX()){
 			ArithmeticException e = new ArithmeticException();
 			throw e;
 		}
 		else {
+			slope = (p1.getY() - p2.getY())/(p1.getX() - p2.getX());
 			return slope;
 		}
 	}

@@ -72,7 +72,60 @@ public class LineTest {
 	
 	@Test
 	public void getSlope1(){
+		Line l = new Line(1,2,3,4);
+		assertEquals(l.getSlope(),1,1);
+	}
+	
+	@Test(expected = ArithmeticException.class)
+	public void getSlope2(){
 		Line l = new Line();
-		assertEquals(,);
+		l.getSlope();
+	}
+	
+	@Test
+	public void getDistance1(){
+		Line l = new Line();
+		assertEquals(l.getDistance(),0,0);
+	}
+	
+	@Test
+	public void getDistance2(){
+		Line l = new Line(1,2,3,4);
+		assertEquals(l.getDistance(),0,3);
+	}
+	
+	@Test
+	public void getMidpoint1(){
+		Line l = new Line();
+		Point p = new Point();
+		assertEquals(l.getMidpoint(),p);
+	}
+	
+	@Test
+	public void getMidpoint2(){
+		Line l = new Line(1,2,3,4);
+		Point p = new Point(2,3);
+		assertEquals(l.getMidpoint(),p);
+	}
+	
+	@Test(expected = ArithmeticException.class)
+	public void parallelTo1(){
+		Line l1 = new Line();
+		Line l2 = new Line();
+		l1.parallelTo(l2);
+	}
+	
+	@Test
+	public void parallelTo2(){
+		Line l1 = new Line(1,2,3,4);
+		Line l2 = new Line(4,3,2,1);
+		assertEquals(l1.parallelTo(l2),true);
+	}
+
+	@Test
+	public void parallelTo3(){
+		Line l1 = new Line(4,3,2,2);
+		Line l2 = new Line(12,13,14,15);
+		assertEquals(l1.parallelTo(l2),false);
 	}
 }

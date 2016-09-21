@@ -96,6 +96,7 @@ public class Line {
 	 */
 	public double getDistance() {
 		int d1, d2, distance;
+		// Need to redo, incorrect formula
 		d1 = p1.getX()+p1.getY();
 		d2 = p2.getX()+p2.getX();
 		distance = Math.abs(d1-d2);

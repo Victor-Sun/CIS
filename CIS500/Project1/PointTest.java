@@ -55,5 +55,27 @@ public class PointTest {
 		Point q = new Point(10,5);
 		assertEquals(p.equals(q),false);
 	}
-	
+	@Test
+	public void manhattanDistance1(){
+		Point p = new Point(10,15);
+		assertEquals(p.manhattanDistance(p),0);
+	}
+	@Test
+	public void manhattanDistance2(){
+		Point p = new Point(5,7);
+		Point q = new Point(10,15);
+		assertEquals(p.manhattanDistance(q),13);
+	}
+	@Test
+	public void manhattanDistance3(){
+		Point p = new Point(5,7);
+		Point q = new Point(0,0);
+		assertEquals(p.manhattanDistance(q),12);
+	}
+	@Test
+	public void manhattanDistance4(){
+		Point p = new Point(5,7);
+		Point q = new Point(0,-5);
+		assertEquals(p.manhattanDistance(q),17);
+	}
 }

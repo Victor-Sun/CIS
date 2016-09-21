@@ -81,5 +81,24 @@ public class Point {
 		return false;
 		
 	}
+
+	/**
+	 * Returns the Manhattan distance between this Point object 
+	 * and the other Point object.
+	 * 
+	 * Manhattan distance is the distance between two points if 
+	 * you walk only in a horizontal or vertical direction.
+	 * 
+	 * @param other the other Point object
+	 * 
+	 * @return the Manhattan distance between this and other 
+	 * Point objects.
+	 */
+	public int manhattanDistance(Point other) {
+		int mDistance;
+		//Manhattan Distance = Math.abs(x1-x2) + Math.abs(y1-y2)
+		mDistance = Math.abs(this.x-other.getX()) + Math.abs(this.y-other.getY());
+		return mDistance;
+	}
 	
 }

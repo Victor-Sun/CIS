@@ -23,6 +23,10 @@ public class PointTest {
 		assertEquals(q.getY(),10);
 	}
 	@Test
+	public void contructorTest4() {
+		//todo
+	}
+	@Test
 	public void toStringTest1(){
 		Point p = new Point();
 		assertEquals(p.toString(),"(0,0)");

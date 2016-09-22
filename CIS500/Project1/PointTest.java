@@ -17,34 +17,49 @@ public class PointTest {
 	}
 	@Test
 	public void contructorTest3() {
-		Point p = new Point(5,10);
+		Point p = new Point("5,10");
 		Point q = new Point(p);
 		assertEquals(q.getX(),5);
 		assertEquals(q.getY(),10);
 	}
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void contructorTest4() {
-		//todo
+		new Point("5");
+	}
+	@Test
+	public void contructorTest5() {
+		Point p = new Point("5,10");
+		Point q = new Point(p);
+		assertEquals(q.getX(),5);
+		assertEquals(q.getY(),10);
+	}
+	@Test(expected = IllegalArgumentException.class)
+	public void contructorTest6() {
+		// Ask if should be null pointer exception
+		Point p = null;
+		new Point(p);
 	}
 	@Test
 	public void toStringTest1(){
-		Point p = new Point();
-		assertEquals(p.toString(),"(0,0)");
-	}
-	@Test
-	public void toStringTest2(){
 		Point p = new Point(5,10);
 		assertEquals(p.toString(),"(5,10)");
 	}
 	@Test
+	public void toStringTest2(){
+		// Constructor for string needs to be rewritten
+		String str = "3,7";
+		Point p = new Point(str);
+		assertEquals(p.toString(),"(3,7)");
+	}
+	@Test
 	public void toStringTest3(){
-		Point p = new Point(3,12);
+		Point p = new Point(5,10);
 		Point q = new Point(p);
-		assertEquals(q.toString(),"(3,12)");
+		assertEquals(q.toString(),"(5,10)");
 	}
 	@Test
 	public void equalsTest1(){
-		Point p = new Point();
+		Point p = new Point(5,10);
 		assertEquals(p.equals(null),false);
 	}
 	@Test

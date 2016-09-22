@@ -31,6 +31,16 @@ public class Point {
 		this.x = other.x;
 		this.y = other.y;
 	}
+
+	/**
+	 * Initializes a newly created Point object with the given values.
+	 * 
+	 * @param x the x coordinate of this point
+	 * @param y the y coordinate of this point
+	 */
+	public Point(String other) {
+		// Write code to have , be a delimiter for a string
+	}
 	
 	/**
 	 * Returns the x coordinate of this Point object.

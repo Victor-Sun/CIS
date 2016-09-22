@@ -98,7 +98,7 @@ public class Line {
 		double d1, d2, distance;
 		d1 = Math.pow(p2.getY() - p1.getY(),2);
 		d2 = Math.pow(p2.getX() - p1.getX(),2);
-		distance = Math.sqrt(d1+d2);
+		distance = Math.sqrt(d1 + d2);
 		return distance;
 	}
 

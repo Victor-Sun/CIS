@@ -35,7 +35,6 @@ public class PointTest {
 	}
 	@Test(expected = IllegalArgumentException.class)
 	public void contructorTest6() {
-		// Ask if should be null pointer exception
 		Point p = null;
 		new Point(p);
 	}
@@ -46,7 +45,6 @@ public class PointTest {
 	}
 	@Test
 	public void toStringTest2(){
-		// Constructor for string needs to be rewritten
 		String str = "3,7";
 		Point p = new Point(str);
 		assertEquals(p.toString(),"(3,7)");

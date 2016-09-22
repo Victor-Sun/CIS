@@ -95,7 +95,6 @@ public class Main {
 		System.out.println("equals");
 		System.out.println("Is line 1 equals to line 2?");
 		System.out.println(l1.equals(l2));
-
 	}
 
 }

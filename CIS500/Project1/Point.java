@@ -23,23 +23,31 @@ public class Point {
 	}
 	
 	/**
+	 * Initializes a newly created Point object with the values 
+	 * from the input string.
+	 * 
+	 * @param str string containing values of coordinates
+	 */
+	public Point(String str) {
+		if(str.length() < 2){
+			throw new IllegalArgumentException();
+		}
+		String[] s = str.split(",");
+		this.x = Integer.parseInt(s[0]);
+		this.y = Integer.parseInt(s[1]);
+	}
+	
+	/**
 	 * Initializes a newly created Point object with the values from the input Point object.
 	 * 
 	 * @param other a Point object used to initialize this Point object
 	 */
 	public Point(Point other) {
+		if(other == null){
+			throw new IllegalArgumentException();
+		}
 		this.x = other.x;
 		this.y = other.y;
-	}
-
-	/**
-	 * Initializes a newly created Point object with the given values.
-	 * 
-	 * @param x the x coordinate of this point
-	 * @param y the y coordinate of this point
-	 */
-	public Point(String other) {
-		// Write code to have , be a delimiter for a string
 	}
 	
 	/**
@@ -107,8 +115,7 @@ public class Point {
 	public int manhattanDistance(Point other) {
 		int mDistance;
 		//Manhattan Distance = Math.abs(x1-x2) + Math.abs(y1-y2)
-		mDistance = Math.abs(this.x-other.getX()) + Math.abs(this.y-other.getY());
+		mDistance = Math.abs(this.x-other.x) + Math.abs(this.y-other.y);
 		return mDistance;
 	}
-	
 }

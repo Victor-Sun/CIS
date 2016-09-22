@@ -60,13 +60,7 @@ public class Line {
 	public Point getP2(){
 		return this.p2;
 	}
-
-	/**
-	 * Returns the y coordinate of this Point object.
-	 * 
-	 * @return the y coordinate of this object.
-	 */
-
+	
 	/**
 	 * Calculate the slope of this Line object using the  
 	 * formula (y1 - y2)/(x1 - x2)

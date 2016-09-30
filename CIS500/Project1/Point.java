@@ -28,7 +28,7 @@ public class Point {
 	 * 
 	 * @param str string containing values of coordinates
 	 */
-	public Point(String str) {
+	public Point(String str) throws IllegalArgumentException{
 		if(str.length() < 2){
 			throw new IllegalArgumentException();
 		}
@@ -42,7 +42,7 @@ public class Point {
 	 * 
 	 * @param other a Point object used to initialize this Point object
 	 */
-	public Point(Point other) {
+	public Point(Point other) throws IllegalArgumentException{
 		if(other == null){
 			throw new IllegalArgumentException();
 		}

@@ -50,18 +50,9 @@ public class ArrayTest
 	{
 		int pos = 0;         // the position in which the next 
 						 // letter is stored
-		
 		// loop through each letter in instance variable      
 		// word and store it in array B if it is not there  	
-		for(int i = 0; i < pos; i++){
-			for(int y = 0; y < word.length(); y++){
-				if(B[pos] != word.charAt(y)){
-					B[pos] = word.charAt(y);
-					System.out.println(word.charAt(y));
-					pos++;
-				}
-			}
-		}
+	
 		// loop through each letter from ‘Z’ to ‘A’ and store       
 		// it in array B if it is not there already 
 //		for(int x = 90;x > 64;x--){

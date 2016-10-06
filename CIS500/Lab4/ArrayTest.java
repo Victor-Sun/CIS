@@ -16,7 +16,7 @@ public class ArrayTest
 	}
 
 	/**
-	Initialize array A with letters ‘A’ through ‘Z’
+	Initialize array A with letters 'A' through 'Z'
 	*/
 	public void InitArrayA(){
 		int n = 0;
@@ -42,38 +42,30 @@ public class ArrayTest
 
 	/**
 	Initialize array B, first with letters in instance variable 
-	word then with letters ‘Z’ through ‘A’. Note that there  
+	word then with letters 'Z' through 'A'. Note that there  
 	are no duplicate letters in B; that is, ignore the letter 
 	under consideration if it is already in the array.   
 	*/
 	public void InitArrayB()
 	{
-		int pos = 0;         // the position in which the next 
+		int pos = 0;     // the position in which the next 
 						 // letter is stored
 		// loop through each letter in instance variable      
 		// word and store it in array B if it is not there  	
 		for(int i = 0; i < word.length(); i++){
-			for(int y = 0; y < B.length; y++){
-				if(B[pos] == word.charAt(i)){
-					continue;
-				}
-				if(B[pos] != word.charAt(i)){
-					B[pos] = word.charAt(i);
-					pos++;
-					break;
-				}
+			if(this.foundInB(word.charAt(i), i) == false){
+				B[pos] = word.charAt(i);
+				pos++;
 			}
 		}
-		// loop through each letter from ‘Z’ to ‘A’ and store       
+		// loop through each letter from 'Z' to 'A' and store       
 		// it in array B if it is not there already 
-//		for(int x = 90;x > 64;x--){
-//			if(B[pos] == (char)x){
-//				System.out.println("Repeat Letter");
-//			} else{
-//				B[pos] = (char)x;
-//				pos++;
-//			}
-//		}
+		for(int x = 90; x > 64; x--){
+			if(this.foundInB((char)x, pos) == false){
+				B[pos] = (char)x;
+				pos++;
+			}
+		}
 	}
  
 	/**

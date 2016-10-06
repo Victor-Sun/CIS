@@ -52,11 +52,24 @@ public class ArrayTest
 						 // letter is stored
 		// loop through each letter in instance variable      
 		// word and store it in array B if it is not there  	
-	
+		for(int i = 0; i < word.length(); i++){
+			for(int y = 0; y < B.length; y++){
+				if(B[pos] == word.charAt(i)){
+					continue;
+				}
+				if(B[pos] != word.charAt(i)){
+					B[pos] = word.charAt(i);
+					pos++;
+					break;
+				}
+			}
+		}
 		// loop through each letter from ‘Z’ to ‘A’ and store       
 		// it in array B if it is not there already 
 //		for(int x = 90;x > 64;x--){
-//			if(B[pos] != (char)x){
+//			if(B[pos] == (char)x){
+//				System.out.println("Repeat Letter");
+//			} else{
 //				B[pos] = (char)x;
 //				pos++;
 //			}

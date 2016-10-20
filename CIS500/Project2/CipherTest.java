@@ -15,7 +15,7 @@ public class CipherTest {
 			Scanner in = new Scanner(System.in);
 
 			
-			System.out.print("Select an option: 1 to encrypt, 2 to decrypt or 0 to quit");
+			System.out.println("Select an option: 1 to encrypt, 2 to decrypt or 0 to quit: ");
 			int input = in.nextInt();
 			
 			if(input == 1 ){
@@ -30,6 +30,7 @@ public class CipherTest {
 				cipher.encryptStream(inStream, outEStream);
 				inStream.close();
 				outEStream.close();
+				System.out.println("File encrypted...");
 			} else if(input == 2){
 				System.out.println("Input decryption keyword: ");
 				keyword = in.next();
@@ -42,7 +43,7 @@ public class CipherTest {
 				cipher.decryptStream(inStream, outDStream);
 				inStream.close();
 				outDStream.close();
-				
+				System.out.println("File decrypted...");
 			} else if(input == 0){
 				System.out.println("Option 0 selected...");
 				System.out.println("Quitting...");

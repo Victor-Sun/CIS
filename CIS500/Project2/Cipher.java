@@ -15,7 +15,7 @@ import java.io.FileOutputStream;
 public class Cipher {
 	
 	private String key;
-	private int akey;
+	private int akey, dkey;
 	private char[] keyArray;
 	
 	/**
@@ -60,6 +60,11 @@ public class Cipher {
 	    }
 	 }
 	
+		/**
+	    Decrypts the contents of a stream.
+	    @param in the input stream
+	    @param out the output stream
+	    */  
 	 public void decryptStream(InputStream in, OutputStream out)
 		       throws IOException
 		 {
@@ -85,7 +90,7 @@ public class Cipher {
 	 */
 	public char encrypt(char c){
 		 if ( akey < 0 )
-			 key = key + 26;
+			 akey = akey + 26;
 
 		 if (Character.isUpperCase(c) )
 			 return (char)((c - 'A' + akey) % 26 + 'A');
@@ -101,17 +106,21 @@ public class Cipher {
 	 * @param c
 	 * @return the decrypted character
 	 */
-	public char decrypt(char c){
-		if ( akey < 0 )
-			 key = key + 26;
-
-		 if (Character.isUpperCase(c) )
-			 return (char)((c + 'A' - akey) % 26 - 'A');
-		
-		 if (Character.isLowerCase(c) )
-			 return (char)((c + 'a' - akey) % 26 - 'a');
-		
-		 return c;
+	public char decrypt(char c) {
+		int result = c;
+		if (Character.isUpperCase(result)) {
+			result = result - (akey % 26);
+			if (result < 'A'){
+				result = result + 26;
+			}
+		} else if (Character.isLowerCase(result)) {
+			result = result - (akey % 26);
+			if (result < 'a'){
+				result = result + 26;
+			}
+		}
+		c = (char) result;
+		return c;
 	}
 
 }

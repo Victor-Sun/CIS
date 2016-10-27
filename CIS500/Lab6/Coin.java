@@ -37,8 +37,10 @@ public class Coin
 
    public boolean equals(Object otherObject)
    {
-      if (otherObject == null) return false;
-      if (getClass() != otherObject.getClass()) return false;
+      if (otherObject == null) 
+         return false;
+      if (getClass() != otherObject.getClass()) 
+         return false;
       Coin other = (Coin) otherObject;
       return value == other.value && name.equals(other.name);
    }

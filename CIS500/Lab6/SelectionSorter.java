@@ -4,13 +4,13 @@
 */
 public class SelectionSorter
 {
-   private int[] a;
+   private Coin[] a;
 
    /**
       Constructs a selection sorter.
       @param anArray the array to sort
    */
-   public SelectionSorter(int[] anArray)
+   public SelectionSorter(Coin[] anArray)
    {
       a = anArray;
    }
@@ -37,7 +37,8 @@ public class SelectionSorter
    {  
       int minPos = from;
       for (int i = from + 1; i < a.length; i++)
-         if (a[i] < a[minPos]) minPos = i;
+         if (a[i].compareTo(a[minPos]) == 1) 
+        	 minPos = i;
       return minPos;
    }
 
@@ -48,7 +49,7 @@ public class SelectionSorter
    */
    private void swap(int i, int j)
    {
-      int temp = a[i];
+      Coin temp = a[i];
       a[i] = a[j];
       a[j] = temp;
    }

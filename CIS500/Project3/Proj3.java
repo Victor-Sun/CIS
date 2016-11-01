@@ -28,7 +28,7 @@ public class Proj3 {
 			String line = in.nextLine();
 			char[] list = line.toCharArray();
 			for(char ch:list){
-				if(state == 0){
+				if(state == 0){ // Whitespace
 					if(Character.isLetterOrDigit(ch) || ch == '_'){
 						token += ch;
 						state = 1;
@@ -43,30 +43,27 @@ public class Proj3 {
 						continue;
 					}
 				}
-				if(state == 1){
+				if(state == 1){ // Alphanumeric or Underscore 
 					if(Character.isLetterOrDigit(ch) || ch == '_'){
 						token += ch;
 						state = 1;
 						continue;
 					} else if(Character.isWhitespace(ch)){
-						updateCounts(token);
 						token = "";
 						state = 0;
 						continue;
 					} else {
-						updateCounts(token);
 						token = "";
 						state = 2;
 						continue;
 					}
 				}
-				if(state == 2){
+				if(state == 2){ // Everything else
 					if(Character.isLetterOrDigit(ch) || ch == '_'){
 						token += ch;
 						state = 1;
 						continue;
 					} else if(Character.isWhitespace(ch)){
-						updateCounts(token);
 						token = "";
 						state = 0;
 						continue;
@@ -88,7 +85,7 @@ public class Proj3 {
 		Iterator i = set.iterator();
 		while(i.hasNext()){
 			Map.Entry me = (Map.Entry)i.next();
-			System.out.println("Identifier: " + me.getKey() + " \t\t & Line Number: " + me.getValue());
+			System.out.println("Identifier: " + me.getKey() + " \t & Line Number: " + me.getValue());
 		}
 	}
 	

@@ -7,9 +7,10 @@ import java.util.Scanner;
 import java.util.Set;
 
 /**
+ * A short project that scans through a source input and
+ * takes all the identifiers and stores them in a map
  * 
  * @author Victor Sun
- *
  */
 public class Proj3 { 
 	Map<String, Set<Integer>> Identifier; // Map for Identifiers

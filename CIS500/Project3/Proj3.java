@@ -6,18 +6,28 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.Set;
 
-public class Proj3 {
-	// TODO Change parseText method to check for identifier 
-	// Get rid of all updateCounts() method to accommodate for inserting the identifiers and their line numbers into the map
-	// Use map to to maintain an ordered collection for identifier 
-
+/**
+ * 
+ * @author Victor Sun
+ *
+ */
+public class Proj3 { 
 	Map<String, Set<Integer>> Identifier; // Map for Identifiers
 	Scanner in = new Scanner(System.in);
 	
+	/**
+	 * Constructor for the Proj3 class
+	 */
 	public Proj3(){
 		Identifier = new HashMap<String, Set<Integer>>();
 	}
 
+	/**
+	 * Parses the input into words to be inserted into a Map
+	 * 
+	 * @param in The input for the text to be parsed for the Map
+	 * @throws IOException
+	 */
 	public void parseText (Scanner in)throws IOException{  
 		String token = "";
 		int lineNo = 0,state = 0;
@@ -78,23 +88,36 @@ public class Proj3 {
 		in.close(); 
 	}
 
+	/**
+	 * Displays the identifier and the line number(s) that the identifier can be found in
+	 */
 	public void displayIdentifiers (){
 		Set set = Identifier.entrySet();
 		Iterator i = set.iterator();
 		while(i.hasNext()){
 			Map.Entry me = (Map.Entry)i.next();
-			System.out.println("Identifier: " + me.getKey() + " \t & Line Number: " + me.getValue());
+			System.out.println("Identifier: " + me.getKey() + " \t & Line Number(s): " + me.getValue());
 		}
 	}
 
-	// Update the count for the identifier
-	public void updateCounts (String token){
+	/**
+	 * Adds the line number to the Map for a key if the key does not exist 
+	 * in the Map, or adds the line number to the existing value for the key in the Map
+	 * 
+	 * @param token The Identifier being added to the Map
+	 * @param line The line number for the Identifier being added to the Map
+	 */
+	public void updateCounts (String token, int line){
 		Set<Integer> lineNumber = new HashSet<Integer>(); // Line number for Identifier
-		// TODO If the identifier already contains the key add the line number to the set
 		if(Identifier.containsKey(token)){
-			
+			lineNumber = Identifier.get(token);
+			lineNumber.add(line);
+			Identifier.put(token, lineNumber);
+			lineNumber.clear();
 		} else {
-		
+			lineNumber.add(line);
+			Identifier.put(token, lineNumber);
+			lineNumber.clear();
 		}
 	}
 }

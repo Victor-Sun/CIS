@@ -1,10 +1,10 @@
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * A short project that scans through a source input and
@@ -20,7 +20,7 @@ public class Proj3 {
 	 * Constructor for the Proj3 class
 	 */
 	public Proj3(){
-		Identifier = new HashMap<String, Set<Integer>>();
+		Identifier = new TreeMap<String, Set<Integer>>();
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class Proj3 {
 	 * @param line The line number for the Identifier being added to the Map
 	 */
 	public void updateCounts (String token, int line){
-		Set<Integer> lineNumber = new HashSet<Integer>(); // Line number for Identifier
+		Set<Integer> lineNumber = new TreeSet<Integer>(); // Line number for Identifier
 		if(Identifier.containsKey(token)){
 			lineNumber = Identifier.get(token);
 			lineNumber.add(line);

@@ -37,6 +37,12 @@ public class Proj3 {
 			lineNo++;
 			String line = in.nextLine();
 			char[] list = line.toCharArray();
+			// Check to see if the line is a comment
+			// TODO Think of better way to implement this check 
+			if(line.startsWith("//")){
+				continue;
+			}
+
 			for(char ch:list){
 				if(state == 0){ // Whitespace
 					if(Character.isLetterOrDigit(ch) || ch == '_'){
@@ -59,10 +65,12 @@ public class Proj3 {
 						state = 1;
 						continue;
 					} else if(Character.isWhitespace(ch)){
+						updateCounts(token, lineNo);
 						token = "";
 						state = 0;
 						continue;
 					} else {
+						updateCounts(token, lineNo);
 						token = "";
 						state = 2;
 						continue;
@@ -114,11 +122,9 @@ public class Proj3 {
 			lineNumber = Identifier.get(token);
 			lineNumber.add(line);
 			Identifier.put(token, lineNumber);
-			lineNumber.clear();
 		} else {
 			lineNumber.add(line);
 			Identifier.put(token, lineNumber);
-			lineNumber.clear();
 		}
 	}
 }

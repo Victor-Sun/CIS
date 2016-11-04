@@ -12,7 +12,7 @@ import java.util.TreeSet;
  * 
  * @author Victor Sun
  */
-public class Proj3 { 
+public class Proj3 {
 	Map<String, Set<Integer>> Identifier; // Map for Identifiers
 	Scanner in = new Scanner(System.in);
 	
@@ -42,7 +42,6 @@ public class Proj3 {
 			if(line.startsWith("//")){
 				continue;
 			}
-
 			for(char ch:list){
 				if(state == 0){ // Whitespace
 					if(Character.isLetterOrDigit(ch) || ch == '_'){

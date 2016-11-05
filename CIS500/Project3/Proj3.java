@@ -37,8 +37,6 @@ public class Proj3 {
 			lineNo++;
 			String line = in.nextLine();
 			char[] list = line.toCharArray();
-			// Check to see if the line is a comment
-			// TODO Think of better way to implement this check 
 			if(line.startsWith("//")){
 				continue;
 			}
@@ -51,6 +49,14 @@ public class Proj3 {
 					} else if(Character.isWhitespace(ch)){
 						token = "";
 						state = 0;
+						continue;
+					} else if(ch == '/'){
+						token = "";
+						state = 3;
+						continue;
+					} else if(ch == '"'){
+						token = "";
+						state = 4;
 						continue;
 					} else {
 						token = "";
@@ -68,6 +74,15 @@ public class Proj3 {
 						token = "";
 						state = 0;
 						continue;
+					} else if(ch == '/'){
+						updateCounts(token, lineNo);
+						token = "";
+						state = 3;
+						continue;
+					} else if(ch == '"'){
+						token = "";
+						state = 4;
+						continue;
 					} else {
 						updateCounts(token, lineNo);
 						token = "";
@@ -84,10 +99,51 @@ public class Proj3 {
 						token = "";
 						state = 0;
 						continue;
+					} else if(ch == '/'){
+						token = "";
+						state = 3;
+						continue;
+					} else if(ch == '"'){
+						token = "";
+						state = 4;
+						continue;
 					} else {
 						token = "";
 						state = 2;
 						continue;
+					}
+				}
+				if(state == 3){
+					if(Character.isLetterOrDigit(ch) || ch == '_'){
+						token += ch;
+						state = 1;
+						continue;
+					} else if(Character.isWhitespace(ch)){
+						token = "";
+						state = 0;
+						continue;
+					} else if(ch == '/'){
+						token = "";
+						state = 3;
+						break;
+					} else if(ch == '"'){
+						token = "";
+						state = 4;
+						continue;
+					} else {
+						token = "";
+						state = 2;
+						continue;
+					}
+				}
+				if(state == 4){
+					if(ch == '"'){
+						token = "";
+						state = 2;
+						continue;
+					} else {
+						token = "";
+						state = 4;
 					}
 				}
 			}

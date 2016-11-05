@@ -8,9 +8,8 @@ import java.io.File;
  * @author Victor Sun
  */
 public class Proj3Demo {
-//TODO 1. Things after // is not identifier
+//TODO 
 	// 2. Check for why DataSet is on line 13 also
-	// 3. String constant is not an identifier
 	public static void main(String[] args) {
 		System.out.println("CIS500 Project 3");
 		Scanner in = new Scanner(System.in);

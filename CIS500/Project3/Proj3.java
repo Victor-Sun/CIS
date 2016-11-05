@@ -144,6 +144,7 @@ public class Proj3 {
 					} else {
 						token = "";
 						state = 4;
+						continue;
 					}
 				}
 			}

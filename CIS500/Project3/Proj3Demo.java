@@ -8,16 +8,14 @@ import java.io.File;
  * @author Victor Sun
  */
 public class Proj3Demo {
-//TODO 
-	// 2. Check for why DataSet is on line 13 also
 	public static void main(String[] args) {
 		System.out.println("CIS500 Project 3");
 		Scanner in = new Scanner(System.in);
 		try{
-//			System.out.print("What is your input file: ");
-//			String inFile = in.next();
+			System.out.print("What is your input file: ");
+			String inFile = in.next();
 			
-			Scanner inf = new Scanner(new File("DataAnalyzer.java"));
+			Scanner inf = new Scanner(new File(inFile));
 			Proj3 P = new Proj3();
 			P.parseText(inf);
 			P.displayIdentifiers();

@@ -71,6 +71,8 @@ public class GameFrame extends JFrame {
 				try{
 					x = Integer.parseInt(input.getText());
 					a = model.verify(x);
+					outputLabel.setText(a);
+					System.out.println(model.getNum());
 				} catch(NumberFormatException e){
 					outputLabel.setText("Guess can only be a number!");
 				}

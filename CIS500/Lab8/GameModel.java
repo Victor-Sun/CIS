@@ -13,6 +13,10 @@ public class GameModel {
     	secretNum = rand.nextInt(1000) + 1;
     	count = 0;
     }
+    
+    public int getNum(){
+    	return secretNum;
+    }
 	
     public String verify (int guess) {
     	count++;

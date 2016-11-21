@@ -39,9 +39,7 @@ public class ArrayQueue<T> {
 	// returns a String representation of the queue, which shows 
 	// a list of elements in the queue
 	public String toString() {
-		System.out.println(list);
-		return null;
-//		return "Array list values: " + list.toString();
+		return list.toString();
 	}
 
 	// Removes all occurrences of element from the queue 

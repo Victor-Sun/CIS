@@ -12,16 +12,15 @@ public class QueueDemo {
 		aQ.deQueue();
 		aQ.deQueue();
 		// display all elements in the queue
-		aQ.toString();
+		System.out.println(aQ.toString());
 		// add two strings from the queue
 		aQ.enQueue("JKL");
 		aQ.enQueue("MNO");
 		// remove one string from the queue
 		aQ.deQueue();
 		// display the list of strings in the queue
-		aQ.toString();
+		System.out.println(aQ.toString());
 		System.out.println("");
-		
 		
 		
 		// create a queue of coins
@@ -36,6 +35,6 @@ public class QueueDemo {
 		// remove one coin from the queue
 		coins.deQueue();
 		//display the list of coins in the queue
-		coins.toString();
+		System.out.println(coins.toString());
 	}
 }

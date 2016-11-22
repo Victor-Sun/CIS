@@ -23,11 +23,11 @@ public abstract class Loan implements Comparable<Loan>{
 		return null;
 	}
 
-	abstract public void calcMonthPayment (); // an abstract method
+	abstract public void calcMonthPayment(); // an abstract method
 
-	public String makeSummary () {
+	public String makeSummary() {
 		// make and return a summary on the loan
-		String summary = "";
+		String summary =  "Name: " + name + "\n Interest Rate: " + interestRate + "\nAmount of Years: " + length + "\nAmount: " + principle;
 		
 		return summary;
 	}
@@ -45,7 +45,7 @@ public class SimpleLoan extends Loan {
 	}
 	
 	public String toString() { 
-		return “Simple Interest Loan”; 
+		return "Simple Interest Loan"; 
 	}
 }
 
@@ -57,6 +57,6 @@ public class AmortizedLoan extends Loan {
 	}
 	
 	public String toString() { 
-		return “Full Amortized Loan”; 
+		return "Full Amortized Loan"; 
 	}
 }

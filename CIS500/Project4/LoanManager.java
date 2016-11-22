@@ -9,6 +9,6 @@ public class LoanManager {
 	// add methods as needed
 	public String toString () {
 		//TODO
-		return;
+		return null;
 	}
 }

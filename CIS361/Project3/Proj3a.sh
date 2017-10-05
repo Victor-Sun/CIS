@@ -24,7 +24,7 @@ OPTIONS
 		Display the number of files inside the junk folder
 
 Author
-	Written by Victor Sun and Chad Mersino
+	Written by 
 
 COPYRIGHT
 	NO COPYRIGHT

@@ -1,0 +1,30 @@
+make: Entering directory `/home/sunvi/Documents/CIS/CIS361/Project3/data/edwardsj'
+cc    -c -o cipher.o cipher.c
+gcc cipher.o -o cipher
+make: Leaving directory `/home/sunvi/Documents/CIS/CIS361/Project3/data/edwardsj'
+make: Entering directory `/home/sunvi/Documents/CIS/CIS361/Project3/data/edwardsj'
+./cipher 1 5 ../../data.txt ../../data.out
+./cipher 2 5 ../../data.out ../../data.bak
+cat ../../data.bak
+In cryptography, a Caesar cipher, also known as Caesar's cipher, the shift cipher, Caesar's code or Caesar shift, is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet. For example, with a shift of 3, A would be replaced by D, B would become E, and so on. The method is named after Julius Caesar, who used it in his private correspondence.
+make: Leaving directory `/home/sunvi/Documents/CIS/CIS361/Project3/data/edwardsj'
+make: Entering directory `/home/sunvi/Documents/CIS/CIS361/Project3/data/harrisr'
+cc    -c -o cipher.o cipher.c
+gcc cipher.o -o cipher
+make: Leaving directory `/home/sunvi/Documents/CIS/CIS361/Project3/data/harrisr'
+make: Entering directory `/home/sunvi/Documents/CIS/CIS361/Project3/data/harrisr'
+./cipher 1 5 ../../data.txt ../../data.out
+./cipher 2 5 ../../data.out ../../data.bak
+cat ../../data.bak
+In cryptography, a Caesar cipher, also known as Caesar's cipher, the shift cipher, Caesar's code or Caesar shift, is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet. For example, with a shift of 3, A would be replaced by D, B would become E, and so on. The method is named after Julius Caesar, who used it in his private correspondence.
+make: Leaving directory `/home/sunvi/Documents/CIS/CIS361/Project3/data/harrisr'
+make: Entering directory `/home/sunvi/Documents/CIS/CIS361/Project3/data/smitht'
+cc    -c -o cipher.o cipher.c
+gcc cipher.o -o cipher
+make: Leaving directory `/home/sunvi/Documents/CIS/CIS361/Project3/data/smitht'
+make: Entering directory `/home/sunvi/Documents/CIS/CIS361/Project3/data/smitht'
+./cipher 1 5 ../../data.txt ../../data.out
+./cipher 2 5 ../../data.out ../../data.bak
+cat ../../data.bak
+In cryptography, a Caesar cipher, also known as Caesar's cipher, the shift cipher, Caesar's code or Caesar shift, is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet. For example, with a shift of 3, A would be replaced by D, B would become E, and so on. The method is named after Julius Caesar, who used it in his private correspondence.
+make: Leaving directory `/home/sunvi/Documents/CIS/CIS361/Project3/data/smitht'

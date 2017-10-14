@@ -24,14 +24,13 @@ CONSTRAINT IC1 PRIMARY KEY (id),
 -- Every student must be classified as 'freshman', 'sophomore',
 -- 'junior', or 'senior'
 CONSTRAINT IC2 CHECK (classification IN ('freshman','sophomore','junior','senior')),
--- CONSTRAINT IC2 CHECK (classification = 'freshman' OR classification = 'sophmore' OR classification = 'junior' OR classification = 'senior'),
 -- IC3: The gpa must be between 0 and 4.0 (inclusive).
 CONSTRAINT IC3 CHECK (gpa BETWEEN 0 AND 4.0),
 -- IC4:
 -- To be classified as a 'junior',a student must have
 -- completed between 55 and 84 hours (inclusive).
-CONSTRAINT IC4 CHECK (NOT (classification = 'junior' AND hours >= 55 AND hours <= 84)),
--- IC5:
+CONSTRAINT IC4 CHECK (classification IN ('freshman','sophomore','senior') OR classification = 'junior' AND hours >= 55 AND hours <= 84),
+-- IC5:	
 -- Every mentor must be a student, and
 -- A student may or may not have a mentor, and
 -- If a mentor's row is deleted, then his/her students are
@@ -45,10 +44,15 @@ CONSTRAINT IC5 FOREIGN KEY (mentor) REFERENCES Students(id) ON DELETE SET NULL D
 -- ------------------------------------------------------------------
 -- Beginning of Transaction-1 (consisting of the next 5 INSERTs)
 SET AUTOCOMMIT OFF
+-- Pass
 INSERT INTO Students VALUES (10, 'Joe', 'freshman', 15,2.8, 20);
+-- Pass
 INSERT INTO Students VALUES (20, 'Joyce', 'sophomore', 35, 3.7, 30);
+-- Pass
 INSERT INTO Students VALUES (30, 'Lisa', 'junior', 63, 3.5, 40);
+-- Pass
 INSERT INTO Students VALUES (40, 'George', 'senior', 82, 3.7, null);
+-- Fail
 INSERT INTO Students VALUES (50, 'Kim', 'junior', 54, 3.5, 40);
 COMMIT;
 -- End of Transaction-1
@@ -57,14 +61,23 @@ SELECT * FROM Students;
 -- Now treat every one of the following INSERTs as a transaction by
 -- itself. h04-DDL.doc Page 3 of 3
 SET AUTOCOMMIT ON
+-- Fail
 INSERT INTO Students VALUES (20, 'John', 'freshman', 10, 3.5, 30);
+-- Fail
 INSERT INTO Students VALUES (null, 'nobody', 'freshman', 10, 3.5, 30);
+-- Fail
 INSERT INTO Students VALUES (60, null, 'freshman', 10, 3.5, 30);
+-- Pass
 INSERT INTO Students VALUES (62, 'Bob', 'senior', 82, 3.7, null);
+-- Fail
 INSERT INTO Students VALUES (63, 'Allen', 'freshman', 10, 4.2, 30);
+-- Fail
 INSERT INTO Students VALUES (64, 'May', 'junior', 43, 3.7, 40);
+-- Fail
 INSERT INTO Students VALUES (74, 'Drew', 'junior', 85, 3.7, 40);
+-- Fail
 INSERT INTO Students VALUES (75, 'Jane', 'sophomore', 39, 3.9, 70);
+-- Fail
 INSERT INTO Students VALUES (41, 'David', 'senior', 93, 3.9, 40);
 -- --------------------------------------------------------------------
 COMMIT;

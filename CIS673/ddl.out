@@ -4,11 +4,8 @@ SQL> Author: Victor Sun
 SQL> */
 SQL> -- --------------------------------------------------------------------
 SQL> DROP TABLE Students;
-DROP TABLE Students
-           *
-ERROR at line 1:
-ORA-00942: table or view does not exist 
 
+Table dropped.
 
 SQL> --
 SQL> CREATE TABLE Students
@@ -33,7 +30,7 @@ SQL> CREATE TABLE Students
  20  -- IC4:
  21  -- To be classified as a 'junior',a student must have
  22  -- completed between 55 and 84 hours (inclusive).
- 23  CONSTRAINT IC4 CHECK (classification IN ('freshman','sophomore','senior') OR classification = 'junior' AND hours >= 55 AND hours <= 84),
+ 23  CONSTRAINT IC4 CHECK (NOT(classification = 'junior' AND (hours < 55 OR hours > 84))),
  24  -- IC5:
  25  -- Every mentor must be a student, and
  26  -- A student may or may not have a mentor, and
@@ -122,11 +119,13 @@ ORA-01400: cannot insert NULL into ("SUNVI"."STUDENTS"."NAME")
 
 
 SQL> -- Pass
-SQL> INSERT INTO Students VALUES (62, 'Bob', 'senior', 82, 3.7, null);
+SQL> INSERT INTO Students VALUES (62, 'Bob', 'Senior', 82, 3.7, null);
+INSERT INTO Students VALUES (62, 'Bob', 'Senior', 82, 3.7, null)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SUNVI.IC2) violated 
 
-1 row created.
 
-Commit complete.
 SQL> -- Fail
 SQL> INSERT INTO Students VALUES (63, 'Allen', 'freshman', 10, 4.2, 30);
 INSERT INTO Students VALUES (63, 'Allen', 'freshman', 10, 4.2, 30)
@@ -181,10 +180,7 @@ SQL> SELECT * From Students;
         20 Joyce      sophomore          35        3.7         30               
         30 Lisa       junior             63        3.5         40               
         40 George     senior             82        3.7                          
-        62 Bob        senior             82        3.7                          
         41 David      senior             93        3.9         40               
-
-6 rows selected.
 
 SQL> --
 SQL> DELETE FROM Students WHERE id = 40;
@@ -199,7 +195,6 @@ SQL> SELECT * From Students;
         10 Joe        freshman           15        2.8         20               
         20 Joyce      sophomore          35        3.7         30               
         30 Lisa       junior             63        3.5                          
-        62 Bob        senior             82        3.7                          
         41 David      senior             93        3.9                          
 
 SQL> --

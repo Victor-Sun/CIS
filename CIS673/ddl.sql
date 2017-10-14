@@ -2,7 +2,7 @@ SPOOL ddl.out
 SET ECHO ON
 /*
 Homework: SQL/DDL
-Author: <your first and last name>
+Author: Victor Sun
 */
 -- --------------------------------------------------------------------
 DROP TABLE Students;
@@ -19,17 +19,18 @@ mentor INTEGER,
 -- IMPORTANT: use the names IC1, IC2, IC3, IC4, and IC5 as given below.
 -- IC1:
 -- Student Id is the primary key
-<<< your SQL code goes here>>>
+CONSTRAINT IC1 PRIMARY KEY (id),
 -- IC2:
 -- Every student must be classified as 'freshman', 'sophomore',
 -- 'junior', or 'senior'
-<<< your SQL code goes here>>>
+CONSTRAINT IC2 CHECK (classification IN ('freshman','sophomore','junior','senior')),
+-- CONSTRAINT IC2 CHECK (classification = 'freshman' OR classification = 'sophmore' OR classification = 'junior' OR classification = 'senior'),
 -- IC3: The gpa must be between 0 and 4.0 (inclusive).
-<<< your SQL code goes here>>>
+CONSTRAINT IC3 CHECK (gpa BETWEEN 0 AND 4.0),
 -- IC4:
 -- To be classified as a 'junior',a student must have
 -- completed between 55 and 84 hours (inclusive).
-<<< your SQL code goes here>>>
+CONSTRAINT IC4 CHECK (NOT (classification = 'junior' AND hours < 55 AND hours > 84)),
 -- IC5:
 -- Every mentor must be a student, and
 -- A student may or may not have a mentor, and
@@ -37,7 +38,7 @@ mentor INTEGER,
 -- left without a mentor, and
 -- Defer the spec of this IC so that a student’s record can be
 -- inserted before his/her mentor’s record is inserted.
-<<< your SQL code goes here>>>
+CONSTRAINT IC5 FOREIGN KEY (mentor) REFERENCES Students(id) ON DELETE SET NULL DEFERRABLE INITIALLY DEFERRED
 );
 -- ------------------------------------------------------------------
 -- TESTING THE SCHEMA
@@ -54,13 +55,12 @@ COMMIT;
 SELECT * FROM Students;
 -- -------------------------------------------------------------------
 -- Now treat every one of the following INSERTs as a transaction by
-itself. 
- h04-DDL.doc Page 3 of 3
+-- itself. h04-DDL.doc Page 3 of 3
 SET AUTOCOMMIT ON
 INSERT INTO Students VALUES (20, 'John', 'freshman', 10, 3.5, 30);
 INSERT INTO Students VALUES (null, 'nobody', 'freshman', 10, 3.5, 30);
 INSERT INTO Students VALUES (60, null, 'freshman', 10, 3.5, 30);
-INSERT INTO Students VALUES (62, 'Bob', 'Senior', 82, 3.7, null);
+INSERT INTO Students VALUES (62, 'Bob', 'senior', 82, 3.7, null);
 INSERT INTO Students VALUES (63, 'Allen', 'freshman', 10, 4.2, 30);
 INSERT INTO Students VALUES (64, 'May', 'junior', 43, 3.7, 40);
 INSERT INTO Students VALUES (74, 'Drew', 'junior', 85, 3.7, 40);

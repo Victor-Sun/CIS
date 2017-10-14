@@ -30,7 +30,7 @@ CONSTRAINT IC3 CHECK (gpa BETWEEN 0 AND 4.0),
 -- IC4:
 -- To be classified as a 'junior',a student must have
 -- completed between 55 and 84 hours (inclusive).
-CONSTRAINT IC4 CHECK (NOT (classification = 'junior' AND hours < 55 AND hours > 84)),
+CONSTRAINT IC4 CHECK (NOT (classification = 'junior' AND hours >= 55 AND hours <= 84)),
 -- IC5:
 -- Every mentor must be a student, and
 -- A student may or may not have a mentor, and

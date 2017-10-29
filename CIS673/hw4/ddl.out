@@ -118,7 +118,7 @@ ERROR at line 1:
 ORA-01400: cannot insert NULL into ("SUNVI"."STUDENTS"."NAME") 
 
 
-SQL> -- Pass
+SQL> -- Fail
 SQL> INSERT INTO Students VALUES (62, 'Bob', 'Senior', 82, 3.7, null);
 INSERT INTO Students VALUES (62, 'Bob', 'Senior', 82, 3.7, null)
 *

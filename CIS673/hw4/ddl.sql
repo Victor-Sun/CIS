@@ -67,7 +67,7 @@ INSERT INTO Students VALUES (20, 'John', 'freshman', 10, 3.5, 30);
 INSERT INTO Students VALUES (null, 'nobody', 'freshman', 10, 3.5, 30);
 -- Fail
 INSERT INTO Students VALUES (60, null, 'freshman', 10, 3.5, 30);
--- Pass
+-- Fail
 INSERT INTO Students VALUES (62, 'Bob', 'Senior', 82, 3.7, null);
 -- Fail
 INSERT INTO Students VALUES (63, 'Allen', 'freshman', 10, 4.2, 30);

@@ -54,7 +54,7 @@ For every employee who works for more than 20 hours on any project that is contr
 -- <<< Your SQL code goes here >>>
 SELECT T1.ESSN, T1.PNO, T1.HOURS
 FROM WORKS_ON T1, DEPARTMENT T2, PROJECT T3
-WHERE T1.PNO = T3.PNUMBER AND T2.DNUMBER = T3.DNUM AND T1.HOURS > 20 AND T2.DNAME = 'RESEARCH'
+WHERE T1.PNO = T3.PNUMBER AND T2.DNUMBER = T3.DNUM AND T1.HOURS > 20 AND T2.DNAME = 'Research'
 ORDER BY T1.ESSN;
 -- JOINING 3 TABLES ---------------------------
 --
@@ -75,7 +75,7 @@ For every employee who works on any project that is located in Houston: Find the
 -- <<< Your SQL code goes here >>>
 SELECT DISTINCT T1.LNAME, T2.DEPENDENT_NAME, T2.RELATIONSHIP
 FROM EMPLOYEE T1, DEPENDENT T2, PROJECT T3, WORKS_ON T4
-WHERE T1.SSN = T2.ESSN AND T1.SSN = T4.ESSN AND T4.PNO = T3.PNUMBER AND T3.PLOCATION = 'HOUSTON'
+WHERE T1.SSN = T2.ESSN AND T1.SSN = T4.ESSN AND T4.PNO = T3.PNUMBER AND T3.PLOCATION = 'Houston'
 ORDER BY T1.LNAME;
 -- SELF JOIN -------------------------------------------
 -- 
@@ -87,7 +87,7 @@ For every employee who works for a department that is different from his supervi
 SELECT T1.SSN, T1.LNAME, T1.DNO, T2.SSN, T2.LNAME, T2.DNO
 FROM EMPLOYEE T1, EMPLOYEE T2
 WHERE T1.SUPER_SSN = T2.SSN AND T1.DNO <> T2.DNO
-ORDER BY T1.SSN
+ORDER BY T1.SSN;
 -- USING MORE THAN ONE RANGE VARIABLE ON ONE TABLE -------------------
 --
 /*(15B)

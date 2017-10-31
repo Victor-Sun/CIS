@@ -52,10 +52,10 @@ ORDER BY SSN;
 For every employee who works for more than 20 hours on any project that is controlled by the research department: Find the ssn, project number,  and number of hours. Sort the results by ssn.
 */
 -- <<< Your SQL code goes here >>>
-SELECT T1.SSN, T2.PNO, T2.HOURS
-FROM EMPLOYEE T1, WORKS_ON T2, DEPARTMENT T3
-WHERE T1.SSN = T2.ESSN AND T1.DNO = T3.DNUMBER AND T2.HOURS > 20 AND T3.DNAME = 'Research'
-ORDER BY SSN;
+SELECT T1.ESSN, T1.PNO, T1.HOURS
+FROM WORKS_ON T1, DEPARTMENT T2, PROJECT T3
+WHERE T1.PNO = T3.PNUMBER AND T2.DNUMBER = T3.DNUM AND T1.HOURS > 20 AND T2.DNAME = 'RESEARCH'
+ORDER BY T1.ESSN;
 -- JOINING 3 TABLES ---------------------------
 --
 /*(12B)
@@ -123,7 +123,7 @@ ORDER BY T1.PNO;
 /*(18B)
 For every employee whose salary is above the average salary in his department: Find the dno, ssn, lname, and salary. Sort the results by department number.
 */
--- <<< Your SQL code goes here >>>
+-- <<< Your SQL code goes here >>> 
 SELECT T1.DNO, T1.SSN, T1.LNAME
 FROM EMPLOYEE T1
 WHERE T1.SALARY > (SELECT AVG(SALARY) FROM EMPLOYEE T2 GROUP BY DNO HAVING T1.DNO = T2.DNO);
@@ -156,6 +156,7 @@ WHERE NOT EXISTS(
 	T1.DNO = T2.DNUMBER AND
 	T2.DNUMBER = 4))
 ORDER BY T1.LNAME;
+--
 SET ECHO OFF
 SPOOL OFF
 

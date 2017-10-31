@@ -28,10 +28,13 @@ SQL> */
 SQL> -- <<< Your SQL code goes here >>>
 SQL> SELECT T1.ESSN, T1.PNO, T1.HOURS
   2  FROM WORKS_ON T1, DEPARTMENT T2, PROJECT T3
-  3  WHERE T1.PNO = T3.PNUMBER AND T2.DNUMBER = T3.DNUM AND T1.HOURS > 20 AND T2.DNAME = 'RESEARCH'
+  3  WHERE T1.PNO = T3.PNUMBER AND T2.DNUMBER = T3.DNUM AND T1.HOURS > 20 AND T2.DNAME = 'Research'
   4  ORDER BY T1.ESSN;
 
-no rows selected
+ESSN             PNO      HOURS                                                 
+--------- ---------- ----------                                                 
+123456789          1       32.5                                                 
+666884444          3         40                                                 
 
 SQL> -- JOINING 3 TABLES ---------------------------
 SQL> --
@@ -58,10 +61,15 @@ SQL> */
 SQL> -- <<< Your SQL code goes here >>>
 SQL> SELECT DISTINCT T1.LNAME, T2.DEPENDENT_NAME, T2.RELATIONSHIP
   2  FROM EMPLOYEE T1, DEPENDENT T2, PROJECT T3, WORKS_ON T4
-  3  WHERE T1.SSN = T2.ESSN AND T1.SSN = T4.ESSN AND T4.PNO = T3.PNUMBER AND T3.PLOCATION = 'HOUSTON'
+  3  WHERE T1.SSN = T2.ESSN AND T1.SSN = T4.ESSN AND T4.PNO = T3.PNUMBER AND T3.PLOCATION = 'Houston'
   4  ORDER BY T1.LNAME;
 
-no rows selected
+LNAME           DEPENDENT_NAME  RELATION                                        
+--------------- --------------- --------                                        
+Wallace         Abner           Spouse                                          
+Wong            Alice           Daughter                                        
+Wong            Joy             Spouse                                          
+Wong            Theodore        Son                                             
 
 SQL> -- SELF JOIN -------------------------------------------
 SQL> --
@@ -73,22 +81,27 @@ SQL> -- <<< Your SQL code goes here >>>
 SQL> SELECT T1.SSN, T1.LNAME, T1.DNO, T2.SSN, T2.LNAME, T2.DNO
   2  FROM EMPLOYEE T1, EMPLOYEE T2
   3  WHERE T1.SUPER_SSN = T2.SSN AND T1.DNO <> T2.DNO
-  4  ORDER BY T1.SSN
-  5  -- USING MORE THAN ONE RANGE VARIABLE ON ONE TABLE -------------------
-  6  --
-  7  /*(15B)
-  8  Find pairs of employee lname's such that the two employees in the pair work on the same project for the same number of hours. List every pair once only. Sort the result by the lname in the left column in the result.
-  9  */
- 10  -- <<< Your SQL code goes here >>>
- 11  SELECT T1.LNAME, T2.LNAME
- 12  FROM EMPLOYEE T1, EMPLOYEE T2, WORKS_ON T3, WORKS_ON T4
- 13  WHERE T1.SSN = T3.ESSN AND T2.SSN = T4.ESSN AND T3.PNO = T4.PNO AND T3.HOURS = T4.HOURS AND T1.SSN < T2.SSN
- 14  ORDER BY T1.LNAME;
-SELECT T1.LNAME, T2.LNAME
-*
-ERROR at line 11:
-ORA-00933: SQL command not properly ended 
+  4  ORDER BY T1.SSN;
 
+SSN       LNAME                  DNO SSN       LNAME                  DNO       
+--------- --------------- ---------- --------- --------------- ----------       
+333445555 Wong                     5 888665555 Borg                     1       
+987654321 Wallace                  4 888665555 Borg                     1       
+
+SQL> -- USING MORE THAN ONE RANGE VARIABLE ON ONE TABLE -------------------
+SQL> --
+SQL> /*(15B)
+SQL> Find pairs of employee lname's such that the two employees in the pair work on the same project for the same number of hours. List every pair once only. Sort the result by the lname in the left column in the result.
+SQL> */
+SQL> -- <<< Your SQL code goes here >>>
+SQL> SELECT T1.LNAME, T2.LNAME
+  2  FROM EMPLOYEE T1, EMPLOYEE T2, WORKS_ON T3, WORKS_ON T4
+  3  WHERE T1.SSN = T3.ESSN AND T2.SSN = T4.ESSN AND T3.PNO = T4.PNO AND T3.HOURS = T4.HOURS AND T1.SSN < T2.SSN
+  4  ORDER BY T1.LNAME;
+
+LNAME           LNAME                                                           
+--------------- ---------------                                                 
+Wong            Zelaya                                                          
 
 SQL> /*(16B)
 SQL> For every employee who has more than one dependent: Find the ssn, lname, and number of dependents. Sort the result by lname

@@ -21,7 +21,7 @@ BEGIN
 		-- Increment the trainers' rating
 		SR.RATING := SR.RATING + &increment;
 		-- Print the sailor' new record
-		DBMS_OUTPUT.PUT_LINE('+++++ new row: '||SR.SID||'	'||SR.NAME||'	'||SR.RATING||'	'||SR.AGE||'	'||SR.TRAINEE);
+		DBMS_OUTPUT.PUT_LINE('+++++ new row: '||SR.SID||'	'||SR.SNAME||'	'||SR.RATING||'	'||SR.AGE||'	'||SR.TRAINEE);
 		END LOOP;
 		-- test whether the sailor has no trainers (Hint: test tCursor%ROWCOUNT)
 	IF tCursor%ROWCOUNT > 0 THEN

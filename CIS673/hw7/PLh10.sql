@@ -22,22 +22,25 @@ BEGIN
 		DBMS_OUTPUT.PUT_LINE('+++ old row: '||SR.SID||'	'||SR.SNAME||'	'||SR.RATING||'	'||SR.AGE||'	'||SR.TRAINEE);
 		-- Increment the trainers' rating
 		SR.RATING := SR.RATING + &increment;
+		UPDATE sailors
+		SET rating = SR.RATING
+		WHERE Sailors.SID = SR.SID;
 		-- Print the sailor' new record
 		DBMS_OUTPUT.PUT_LINE('+++++ new row: '||SR.SID||'	'||SR.SNAME||'	'||SR.RATING||'	'||SR.AGE||'	'||SR.TRAINEE);
 	END LOOP;
-	COMMIT;
 	-- test whether the sailor has no trainers (Hint: test tCursor%ROWCOUNT)
 	IF tCursor%ROWCOUNT = 0 THEN
 		raise NO_DATA_FOUND;
 	ELSE
+		COMMIT;
 		DBMS_OUTPUT.PUT_LINE('+++++ DB has been updated');
 	END IF;
 	CLOSE tCursor;
 EXCEPTION
 	WHEN NO_DATA_FOUND THEN
-		DBMS_OUTPUT.PUT_LINE('+++++'||sr.sid|| 'is either not a sailor, or has no trainer');
+		DBMS_OUTPUT.PUT_LINE('+++++ &traineeID  is either not a sailor, or has no trainer');
 	WHEN OTHERS THEN
-		DBMS_OUTPUT.PUT_LINE('+++++'||SQLCODE||'...'||SQLERRM);
+		DBMS_OUTPUT.PUT_LINE('+++++ '||SQLCODE||' ...'||SQLERRM);
 	END;
 /
 -- Let's see what happened to the database

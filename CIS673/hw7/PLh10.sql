@@ -12,11 +12,13 @@ DECLARE
 		SELECT SID, SNAME, RATING, AGE, TRAINEE
 		FROM SAILORS
 		WHERE TRAINEE = '&traineeID';
+	
 BEGIN
 	OPEN tCursor;
 	LOOP
 		-- Fetch the qualifying rows one by one
 		FETCH tCursor INTO SR;
+		EXIT WHEN tCursor%NOTFOUND;
 		-- Print the sailor' old record
 		DBMS_OUTPUT.PUT_LINE('+++ old row: '||SR.SID||'	'||SR.SNAME||'	'||SR.RATING||'	'||SR.AGE||'	'||SR.TRAINEE);
 		-- Increment the trainers' rating
@@ -24,7 +26,7 @@ BEGIN
 		-- Print the sailor' new record
 		DBMS_OUTPUT.PUT_LINE('+++++ new row: '||SR.SID||'	'||SR.SNAME||'	'||SR.RATING||'	'||SR.AGE||'	'||SR.TRAINEE);
 	END LOOP;
-		-- test whether the sailor has no trainers (Hint: test tCursor%ROWCOUNT)
+	-- test whether the sailor has no trainers (Hint: test tCursor%ROWCOUNT)
 	IF tCursor%ROWCOUNT > 0 THEN
 		COMMIT;
 	END IF;

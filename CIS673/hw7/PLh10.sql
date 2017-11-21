@@ -22,9 +22,9 @@ BEGIN
 		DBMS_OUTPUT.PUT_LINE('+++ old row: '||SR.SID||'	'||SR.SNAME||'	'||SR.RATING||'	'||SR.AGE||'	'||SR.TRAINEE);
 		-- Increment the trainers' rating
 		SR.RATING := SR.RATING + &increment;
-		UPDATE sailors
-		SET rating = SR.RATING
-		WHERE Sailors.SID = SR.SID;
+		UPDATE SAILORS
+		SET RATING = SR.RATING
+		WHERE SAILORS.SID = SR.SID;
 		-- Print the sailor' new record
 		DBMS_OUTPUT.PUT_LINE('+++++ new row: '||SR.SID||'	'||SR.SNAME||'	'||SR.RATING||'	'||SR.AGE||'	'||SR.TRAINEE);
 	END LOOP;

@@ -12,7 +12,6 @@ DECLARE
 		SELECT SID, SNAME, RATING, AGE, TRAINEE
 		FROM SAILORS
 		WHERE TRAINEE = '&traineeID';
-	
 BEGIN
 	OPEN tCursor;
 	LOOP
@@ -26,9 +25,12 @@ BEGIN
 		-- Print the sailor' new record
 		DBMS_OUTPUT.PUT_LINE('+++++ new row: '||SR.SID||'	'||SR.SNAME||'	'||SR.RATING||'	'||SR.AGE||'	'||SR.TRAINEE);
 	END LOOP;
+	COMMIT;
 	-- test whether the sailor has no trainers (Hint: test tCursor%ROWCOUNT)
-	IF tCursor%ROWCOUNT > 0 THEN
-		COMMIT;
+	IF tCursor%ROWCOUNT = 0 THEN
+		raise NO_DATA_FOUND;
+	ELSE
+		DBMS_OUTPUT.PUT_LINE('+++++ DB has been updated');
 	END IF;
 	CLOSE tCursor;
 EXCEPTION

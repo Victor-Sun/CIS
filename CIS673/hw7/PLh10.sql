@@ -15,7 +15,7 @@ BEGIN
 	OPEN tCursor;
 	LOOP
 		-- Fetch the qualifying rows one by one
-		FETCH tCursor INTO sr;
+		FETCH tCursor INTO SR;
 		-- Print the sailor' old record
 		DBMS_OUTPUT.PUT_LINE('+++ old row: '||SR.SID||'	'||SR.NAME||'	'||SR.RATING||'	'||SR.AGE||'	'||SR.TRAINEE);
 		-- Increment the trainers' rating

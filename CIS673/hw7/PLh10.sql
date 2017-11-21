@@ -17,7 +17,7 @@ BEGIN
 		-- Fetch the qualifying rows one by one
 		FETCH tCursor INTO SR;
 		-- Print the sailor' old record
-		DBMS_OUTPUT.PUT_LINE('+++ old row: '||SR.SID||'	'||SR.NAME||'	'||SR.RATING||'	'||SR.AGE||'	'||SR.TRAINEE);
+		DBMS_OUTPUT.PUT_LINE('+++ old row: '||SR.SID||'	'||SR.SNAME||'	'||SR.RATING||'	'||SR.AGE||'	'||SR.TRAINEE);
 		-- Increment the trainers' rating
 		SR.RATING := SR.RATING + &increment;
 		-- Print the sailor' new record

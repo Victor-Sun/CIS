@@ -5,10 +5,19 @@ SQL> -- Testing the trigger for UPDATE
 SQL> --
 SQL> -- (1)
 SQL> UPDATE Sailors SET trainee=95 where sid=85;
-UPDATE Sailors SET trainee=95 where sid=85
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> -- (2)
+SQL> UPDATE Sailors SET trainee=71 where sid=64;
+UPDATE Sailors SET trainee=71 where sid=64
        *
 ERROR at line 1:
-ORA-20001: +++++ DELETE or UPDATE rejected. Trainee ..85.. is a LogKeeper 
+ORA-20001: +++++ DELETE or UPDATE rejected. Trainee ..22.. is a LogKeeper 
 ORA-06512: at "SUNVI.BIC5_TB", line 10 
 ORA-04088: error during execution of trigger 'SUNVI.BIC5_TB' 
 
@@ -17,19 +26,15 @@ SQL> commit;
 
 Commit complete.
 
-SQL> -- (2)
-SQL> UPDATE Sailors SET trainee=71 where sid=64;
-
-1 row updated.
-
-SQL> commit;
-
-Commit complete.
-
 SQL> -- (3)
 SQL> UPDATE Sailors SET trainee=31 where sid=58;
+UPDATE Sailors SET trainee=31 where sid=58
+       *
+ERROR at line 1:
+ORA-20001: +++++ DELETE or UPDATE rejected. Trainee ..32.. is a LogKeeper 
+ORA-06512: at "SUNVI.BIC5_TB", line 10 
+ORA-04088: error during execution of trigger 'SUNVI.BIC5_TB' 
 
-1 row updated.
 
 SQL> commit;
 
@@ -40,8 +45,13 @@ SQL> -- Testing the trigger for DELETE
 SQL> --
 SQL> -- (4)
 SQL> DELETE FROM Sailors where sid=74;
+DELETE FROM Sailors where sid=74
+            *
+ERROR at line 1:
+ORA-20001: +++++ DELETE or UPDATE rejected. Trainee ..95.. is a LogKeeper 
+ORA-06512: at "SUNVI.BIC5_TB", line 10 
+ORA-04088: error during execution of trigger 'SUNVI.BIC5_TB' 
 
-1 row deleted.
 
 SQL> commit;
 
@@ -52,7 +62,7 @@ SQL> DELETE FROM Sailors where sid=22;
 DELETE FROM Sailors where sid=22
             *
 ERROR at line 1:
-ORA-20001: +++++ DELETE or UPDATE rejected. Trainee ..22.. is a LogKeeper 
+ORA-20001: +++++ DELETE or UPDATE rejected. Trainee ..85.. is a LogKeeper 
 ORA-06512: at "SUNVI.BIC5_TB", line 10 
 ORA-04088: error during execution of trigger 'SUNVI.BIC5_TB' 
 
@@ -72,13 +82,14 @@ SQL> SELECT * FROM Sailors order by sid;
         29 Mike                     1         33                                
         31 Mary                     8         55         85                     
         32 Albert                   8         25         31                     
-        58 Jim                     10         35         31                     
-        64 Jane                     7         35         71                     
+        58 Jim                     10         35         32                     
+        64 Jane                     7         35         22                     
         71 Dave                    10         16         32                     
-        85 Art                      3         25         29                     
+        74 Jane                     9         40         95                     
+        85 Art                      3         25         95                     
         95 Jane                     3         63                                
 
-9 rows selected.
+10 rows selected.
 
 SQL> -- Drop the trigger
 SQL> Drop Trigger bIC5_TB;

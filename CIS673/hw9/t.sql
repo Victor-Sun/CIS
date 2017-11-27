@@ -1,4 +1,4 @@
-POOL PLh110.out
+SPOOL PLh110.out
 SET ECHO ON
 --
 -- <<<<< ENTER YOUR NAME HERE >>>>>
